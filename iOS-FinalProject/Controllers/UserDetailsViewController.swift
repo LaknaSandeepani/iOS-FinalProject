@@ -105,6 +105,25 @@ class UserDetailsViewController: UIViewController {
         button.widthAnchor.constraint(equalToConstant: 200).isActive = true
         return button
     }()
+    
+    private let calculateBMIButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Calculate BMI", for: .normal)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 5
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        return button
+    }()
+
+    private let bmiLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Your BMI is: "
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     // MARK: - View Lifecycle
     
@@ -133,6 +152,9 @@ class UserDetailsViewController: UIViewController {
         view.addSubview(fitnessGoalLabel)
         view.addSubview(fitnessGoalTextField)
         view.addSubview(sendButton)
+        view.addSubview(calculateBMIButton)
+        view.addSubview(bmiLabel)
+        calculateBMIButton.addTarget(self, action: #selector(calculateBMI), for: .touchUpInside)
         
     }
     
@@ -142,19 +164,19 @@ class UserDetailsViewController: UIViewController {
         // Details Label Constraints
         NSLayoutConstraint.activate([
             detailsLabel.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
-            detailsLabel.topAnchor.constraint(equalTo: margins.topAnchor, constant: 20)
+            detailsLabel.topAnchor.constraint(equalTo: margins.topAnchor, constant: 10)
         ])
 
         // Height Label Constraints
         NSLayoutConstraint.activate([
             heightLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            heightLabel.topAnchor.constraint(equalTo: detailsLabel.topAnchor, constant: 80)
+            heightLabel.topAnchor.constraint(equalTo: detailsLabel.topAnchor, constant: 50)
         ])
 
         // Height Text Field Constraints
         NSLayoutConstraint.activate([
             heightTextField.leadingAnchor.constraint(equalTo: heightLabel.leadingAnchor),
-            heightTextField.topAnchor.constraint(equalTo: heightLabel.bottomAnchor, constant: 20),
+            heightTextField.topAnchor.constraint(equalTo: heightLabel.bottomAnchor, constant: 10),
             heightTextField.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
         ])
 
@@ -167,7 +189,7 @@ class UserDetailsViewController: UIViewController {
         // Weight Text Field Constraints
         NSLayoutConstraint.activate([
             weightTextField.leadingAnchor.constraint(equalTo: weightLabel.leadingAnchor),
-            weightTextField.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 20),
+            weightTextField.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 10),
             weightTextField.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
         ])
 
@@ -180,7 +202,7 @@ class UserDetailsViewController: UIViewController {
         // Age Text Field Constraints
         NSLayoutConstraint.activate([
             ageTextField.leadingAnchor.constraint(equalTo: ageLabel.leadingAnchor),
-            ageTextField.topAnchor.constraint(equalTo: ageLabel.bottomAnchor, constant: 20),
+            ageTextField.topAnchor.constraint(equalTo: ageLabel.bottomAnchor, constant: 10),
             ageTextField.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
         ])
         
@@ -193,7 +215,7 @@ class UserDetailsViewController: UIViewController {
         // Gender Text Field Constraints
         NSLayoutConstraint.activate([
             genderTextField.leadingAnchor.constraint(equalTo: genderLabel.leadingAnchor),
-            genderTextField.topAnchor.constraint(equalTo: genderLabel.bottomAnchor, constant: 20),
+            genderTextField.topAnchor.constraint(equalTo: genderLabel.bottomAnchor, constant: 10),
             genderTextField.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
         ])
          
@@ -206,7 +228,7 @@ class UserDetailsViewController: UIViewController {
         // Fitness Goal Text Field Constraints
         NSLayoutConstraint.activate([
             fitnessGoalTextField.leadingAnchor.constraint(equalTo: fitnessGoalLabel.leadingAnchor),
-            fitnessGoalTextField.topAnchor.constraint(equalTo: fitnessGoalLabel.bottomAnchor, constant: 20),
+            fitnessGoalTextField.topAnchor.constraint(equalTo: fitnessGoalLabel.bottomAnchor, constant: 10),
             fitnessGoalTextField.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
         ])
         
@@ -217,11 +239,66 @@ class UserDetailsViewController: UIViewController {
             sendButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
         ])
 
-       
+        // calculateBMIButton Constraints
+        NSLayoutConstraint.activate([
+            calculateBMIButton.leadingAnchor.constraint(equalTo: sendButton.leadingAnchor),
+            calculateBMIButton.topAnchor.constraint(equalTo: sendButton.bottomAnchor, constant: 10),
+            calculateBMIButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
+        ])
+
+        // BMI Lable Constraints
+        NSLayoutConstraint.activate([
+            bmiLabel.leadingAnchor.constraint(equalTo: calculateBMIButton.leadingAnchor),
+            bmiLabel.topAnchor.constraint(equalTo: calculateBMIButton.bottomAnchor, constant: 10),
+            bmiLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
+        ])
 
         
     }
-}
+    @objc private func calculateBMI() {
+        guard let heightText = heightTextField.text,
+              let height = Double(heightText),
+              let weightText = weightTextField.text,
+              let weight = Double(weightText) else {
+            bmiLabel.text = "Please enter height and weight"
+            return
+        }
+        
+        let heightInMeters = height / 100.0
+        let bmi = weight / (heightInMeters * heightInMeters)
+        let formattedBMI = String(format: "%.2f", bmi)
+        bmiLabel.text = String(format: "Your BMI is: %.1f", bmi)
+        
+        // Suggest a fitness plan based on BMI value
+        var plan: String
+        if bmi < 18.5 {
+            bmiLabel.textColor = UIColor.blue
+            bmiLabel.text = "Underweight (\(formattedBMI))"
+            plan = "You are underweight. You can improve your BMI by increasing your calorie intake and doing muscle-building exercises."
+        } else if bmi < 25 {
+            bmiLabel.textColor = UIColor.green
+            bmiLabel.text = "Normal weight (\(formattedBMI))"
+            plan = "You are at a healthy weight. Keep it up by eating a balanced diet and staying active."
+        } else if bmi < 30 {
+            bmiLabel.textColor = UIColor.orange
+            bmiLabel.text = "Overweight (\(formattedBMI))"
+            plan = "You are overweight. You can improve your BMI by reducing your calorie intake, increasing your physical activity, and doing cardiovascular exercises."
+        } else {
+            bmiLabel.textColor = UIColor.red
+            bmiLabel.text = "Obese (\(formattedBMI))"
+            plan = "You are obese. You can improve your BMI by reducing your calorie intake, increasing your physical activity, and doing both cardiovascular and strength-training exercises."
+        }
+        
+        // Display the user's BMI and suggested fitness plan in an alert
+        let alert = UIAlertController(title: "Your BMI", message: "Your BMI is \(formattedBMI)\n\n\(plan)", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    
+    
+        }
+    }
+
 
 
        
