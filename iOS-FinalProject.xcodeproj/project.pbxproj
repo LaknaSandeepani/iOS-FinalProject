@@ -13,7 +13,6 @@
 		B4C032FF2A06C93900628277 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4C032FD2A06C93900628277 /* LaunchScreen.storyboard */; };
 		B4C0336B2A0CFDC700628277 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C0336A2A0CFDC700628277 /* MainViewController.swift */; };
 		B4C033752A0E77A100628277 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C033742A0E77A100628277 /* UserDetailsViewController.swift */; };
-		B4E1A6B62A10E7780055DD49 /* BMIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6B52A10E7780055DD49 /* BMIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +24,6 @@
 		B4C033002A06C93900628277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4C0336A2A0CFDC700628277 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B4C033742A0E77A100628277 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
-		B4E1A6B52A10E7780055DD49 /* BMIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMIViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +71,6 @@
 			children = (
 				B4C0336A2A0CFDC700628277 /* MainViewController.swift */,
 				B4C033742A0E77A100628277 /* UserDetailsViewController.swift */,
-				B4E1A6B52A10E7780055DD49 /* BMIViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -151,7 +148,6 @@
 				B4C032F32A06C93800628277 /* AppDelegate.swift in Sources */,
 				B4C032F52A06C93800628277 /* SceneDelegate.swift in Sources */,
 				B4C033752A0E77A100628277 /* UserDetailsViewController.swift in Sources */,
-				B4E1A6B62A10E7780055DD49 /* BMIViewController.swift in Sources */,
 				B4C0336B2A0CFDC700628277 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
