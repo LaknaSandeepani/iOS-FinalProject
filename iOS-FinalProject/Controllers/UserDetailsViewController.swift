@@ -97,7 +97,7 @@ class UserDetailsViewController: UIViewController {
 
     private let sendButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Send", for: .normal)
+        button.setTitle("Calculate BMI", for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -108,7 +108,7 @@ class UserDetailsViewController: UIViewController {
     
     private let calculateBMIButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Calculate BMI", for: .normal)
+        button.setTitle("Send", for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -124,11 +124,23 @@ class UserDetailsViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private let fitnessLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Click To View Suggested Exercises"
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = .blue
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = true
+        return label
+    }()
+
 
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         title = "User Details"
         view.backgroundColor = .white
@@ -154,7 +166,10 @@ class UserDetailsViewController: UIViewController {
         view.addSubview(sendButton)
         view.addSubview(calculateBMIButton)
         view.addSubview(bmiLabel)
-        calculateBMIButton.addTarget(self, action: #selector(calculateBMI), for: .touchUpInside)
+        view.addSubview(fitnessLabel)
+        sendButton.addTarget(self, action: #selector(calculateBMI), for: .touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(navigateToNextActivity))
+        fitnessLabel.addGestureRecognizer(tapGesture)
         
     }
     
@@ -248,10 +263,20 @@ class UserDetailsViewController: UIViewController {
 
         // BMI Lable Constraints
         NSLayoutConstraint.activate([
-            bmiLabel.leadingAnchor.constraint(equalTo: calculateBMIButton.leadingAnchor),
             bmiLabel.topAnchor.constraint(equalTo: calculateBMIButton.bottomAnchor, constant: 10),
-            bmiLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
+            bmiLabel.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
+            bmiLabel.leadingAnchor.constraint(greaterThanOrEqualTo: margins.leadingAnchor),
+            bmiLabel.trailingAnchor.constraint(lessThanOrEqualTo: margins.trailingAnchor)
         ])
+
+        // Fitness Lable Constraints
+        NSLayoutConstraint.activate([
+            fitnessLabel.topAnchor.constraint(equalTo: bmiLabel.bottomAnchor, constant: 10),
+            fitnessLabel.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
+            fitnessLabel.leadingAnchor.constraint(greaterThanOrEqualTo: margins.leadingAnchor),
+            fitnessLabel.trailingAnchor.constraint(lessThanOrEqualTo: margins.trailingAnchor)
+        ])
+
 
         
     }
@@ -274,19 +299,19 @@ class UserDetailsViewController: UIViewController {
         if bmi < 18.5 {
             bmiLabel.textColor = UIColor.blue
             bmiLabel.text = "Underweight (\(formattedBMI))"
-            plan = "You are underweight. You can improve your BMI by increasing your calorie intake and doing muscle-building exercises."
+            plan = "You are underweight. You can improve your BMI by increasing your calorie intake and doing muscle-building exercises.Good to follow Muscle Building Plans"
         } else if bmi < 25 {
             bmiLabel.textColor = UIColor.green
             bmiLabel.text = "Normal weight (\(formattedBMI))"
-            plan = "You are at a healthy weight. Keep it up by eating a balanced diet and staying active."
+            plan = "You are at a healthy weight. Keep it up by eating a balanced diet and staying active.Good to follow Muscle Building Plans"
         } else if bmi < 30 {
             bmiLabel.textColor = UIColor.orange
             bmiLabel.text = "Overweight (\(formattedBMI))"
-            plan = "You are overweight. You can improve your BMI by reducing your calorie intake, increasing your physical activity, and doing cardiovascular exercises."
+            plan = "You are overweight. You can improve your BMI by reducing your calorie intake, increasing your physical activity, and doing cardiovascular exercises.Good to follow Weight Loss Plans"
         } else {
             bmiLabel.textColor = UIColor.red
             bmiLabel.text = "Obese (\(formattedBMI))"
-            plan = "You are obese. You can improve your BMI by reducing your calorie intake, increasing your physical activity, and doing both cardiovascular and strength-training exercises."
+            plan = "You are obese. You can improve your BMI by reducing your calorie intake, increasing your physical activity, and doing both cardiovascular and strength-training exercises.Good to follow Weight Loss Plans"
         }
         
         // Display the user's BMI and suggested fitness plan in an alert
@@ -297,6 +322,13 @@ class UserDetailsViewController: UIViewController {
     
     
         }
+    
+    @objc private func navigateToNextActivity() {
+        // Perform the navigation to the next activity here
+       
+        let nextViewController = MainViewController()
+        present(nextViewController, animated: true, completion: nil)
+    }
     }
 
 
