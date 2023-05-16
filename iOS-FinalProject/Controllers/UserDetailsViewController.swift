@@ -143,7 +143,7 @@ class UserDetailsViewController: UIViewController {
         
         
         title = "User Details"
-        view.backgroundColor = .white
+        view.backgroundColor = .gray
         
         setupViews()
         setupConstraints()
@@ -282,12 +282,15 @@ class UserDetailsViewController: UIViewController {
     }
     @objc private func calculateBMI() {
         guard let heightText = heightTextField.text,
+              !heightText.isEmpty,
               let height = Double(heightText),
               let weightText = weightTextField.text,
+              !weightText.isEmpty,
               let weight = Double(weightText) else {
-            bmiLabel.text = "Please enter height and weight"
+            bmiLabel.text = "Please enter valid height and weight"
             return
         }
+        
         let age = ageTextField.text
         let gender = genderTextField.text
         let goal = fitnessGoalTextField.text
