@@ -106,16 +106,16 @@ class UserDetailsViewController: UIViewController {
         return button
     }()
     
-    private let calculateBMIButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Send", for: .normal)
-        button.backgroundColor = .black
-        button.layer.cornerRadius = 5
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        return button
-    }()
+//    private let calculateBMIButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setTitle("Send", for: .normal)
+//        button.backgroundColor = .black
+//        button.layer.cornerRadius = 5
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//        button.widthAnchor.constraint(equalToConstant: 200).isActive = true
+//        return button
+//    }()
 
     private let bmiLabel: UILabel = {
         let label = UILabel()
@@ -164,7 +164,7 @@ class UserDetailsViewController: UIViewController {
         view.addSubview(fitnessGoalLabel)
         view.addSubview(fitnessGoalTextField)
         view.addSubview(sendButton)
-        view.addSubview(calculateBMIButton)
+//        view.addSubview(calculateBMIButton)
         view.addSubview(bmiLabel)
         view.addSubview(fitnessLabel)
         sendButton.addTarget(self, action: #selector(calculateBMI), for: .touchUpInside)
@@ -254,16 +254,16 @@ class UserDetailsViewController: UIViewController {
             sendButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
         ])
 
-        // calculateBMIButton Constraints
-        NSLayoutConstraint.activate([
-            calculateBMIButton.leadingAnchor.constraint(equalTo: sendButton.leadingAnchor),
-            calculateBMIButton.topAnchor.constraint(equalTo: sendButton.bottomAnchor, constant: 10),
-            calculateBMIButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
-        ])
+//        // calculateBMIButton Constraints
+//        NSLayoutConstraint.activate([
+//            calculateBMIButton.leadingAnchor.constraint(equalTo: sendButton.leadingAnchor),
+//            calculateBMIButton.topAnchor.constraint(equalTo: sendButton.bottomAnchor, constant: 10),
+//            calculateBMIButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
+//        ])
 
         // BMI Lable Constraints
         NSLayoutConstraint.activate([
-            bmiLabel.topAnchor.constraint(equalTo: calculateBMIButton.bottomAnchor, constant: 10),
+            bmiLabel.topAnchor.constraint(equalTo: sendButton.bottomAnchor, constant: 10),
             bmiLabel.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
             bmiLabel.leadingAnchor.constraint(greaterThanOrEqualTo: margins.leadingAnchor),
             bmiLabel.trailingAnchor.constraint(lessThanOrEqualTo: margins.trailingAnchor)
@@ -288,9 +288,59 @@ class UserDetailsViewController: UIViewController {
             bmiLabel.text = "Please enter height and weight"
             return
         }
-        
+        let age = ageTextField.text
+        let gender = genderTextField.text
+        let goal = fitnessGoalTextField.text
         let heightInMeters = height / 100.0
         let bmi = weight / (heightInMeters * heightInMeters)
+        
+        // Create the request URL
+            guard let url = URL(string: "http://localhost:8088/api/save-bmi") else {
+                print("Invalid URL")
+                return
+            }
+        // Create the request body
+            let requestBody: [String: Any] = [
+                "age":age,
+                "gender":gender,
+                "height": height,
+                "weight": weight,
+                "bmi": bmi,
+                "goal": goal
+            ]
+            
+            // Convert the request body to JSON data
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: requestBody) else {
+                print("Failed to serialize JSON data")
+                return
+            }
+        // Create the HTTP request
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = jsonData
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Send the HTTP request
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    print("Request error:", error)
+                    return
+                }
+                
+                guard let data = data else {
+                    print("No response data")
+                    return
+                }
+                
+                // Handle the response data
+                if let responseString = String(data: data, encoding: .utf8) {
+                    print("Response:", responseString)
+                }
+            }
+            
+            task.resume()
+        
+        
         let formattedBMI = String(format: "%.2f", bmi)
         bmiLabel.text = String(format: "Your BMI is: %.1f", bmi)
         
@@ -326,7 +376,7 @@ class UserDetailsViewController: UIViewController {
     @objc private func navigateToNextActivity() {
         // Perform the navigation to the next activity here
        
-        let nextViewController = MainViewController()
+        let nextViewController = HomePageViewController()
         present(nextViewController, animated: true, completion: nil)
     }
     }
