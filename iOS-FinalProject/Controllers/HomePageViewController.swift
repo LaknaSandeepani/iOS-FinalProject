@@ -1,4 +1,4 @@
-//
+
 //  HomePageViewController.swift
 //  iOS-FinalProject
 //
@@ -81,14 +81,15 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? ExerciseCell else {
             fatalError("Unable to dequeue ExerciseCell")
         }
-        
+
         // Configure the cell with exercise data
         let exercise = exercises[indexPath.item]
         cell.nameLabel.text = exercise.name
-       
+
         // Customize the cell's appearance based on exercise data
-        
+
         return cell
     }
 
+    
 }

@@ -14,9 +14,10 @@
 		B4C0336B2A0CFDC700628277 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C0336A2A0CFDC700628277 /* MainViewController.swift */; };
 		B4C033752A0E77A100628277 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C033742A0E77A100628277 /* UserDetailsViewController.swift */; };
 		B4E1A6B82A123B140055DD49 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6B72A123B140055DD49 /* HomePageViewController.swift */; };
-		B4E1A6BA2A125B830055DD49 /* DetailsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6B92A125B830055DD49 /* DetailsPageViewController.swift */; };
 		B4E1A6BD2A1392C00055DD49 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6BC2A1392C00055DD49 /* Exercise.swift */; };
 		B4E1A6C22A1398990055DD49 /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C12A1398990055DD49 /* ExerciseCell.swift */; };
+		B4E1A6C42A148C140055DD49 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C32A148C140055DD49 /* ExerciseDetailViewController.swift */; };
+		B4E1A6C62A14D3580055DD49 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +30,10 @@
 		B4C0336A2A0CFDC700628277 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B4C033742A0E77A100628277 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		B4E1A6B72A123B140055DD49 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
-		B4E1A6B92A125B830055DD49 /* DetailsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPageViewController.swift; sourceTree = "<group>"; };
 		B4E1A6BC2A1392C00055DD49 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		B4E1A6C12A1398990055DD49 /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
+		B4E1A6C32A148C140055DD49 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
+		B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +84,8 @@
 				B4C0336A2A0CFDC700628277 /* MainViewController.swift */,
 				B4C033742A0E77A100628277 /* UserDetailsViewController.swift */,
 				B4E1A6B72A123B140055DD49 /* HomePageViewController.swift */,
-				B4E1A6B92A125B830055DD49 /* DetailsPageViewController.swift */,
+				B4E1A6C32A148C140055DD49 /* ExerciseDetailViewController.swift */,
+				B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -176,8 +179,9 @@
 				B4C032F32A06C93800628277 /* AppDelegate.swift in Sources */,
 				B4C032F52A06C93800628277 /* SceneDelegate.swift in Sources */,
 				B4C033752A0E77A100628277 /* UserDetailsViewController.swift in Sources */,
+				B4E1A6C62A14D3580055DD49 /* RegistrationViewController.swift in Sources */,
+				B4E1A6C42A148C140055DD49 /* ExerciseDetailViewController.swift in Sources */,
 				B4E1A6B82A123B140055DD49 /* HomePageViewController.swift in Sources */,
-				B4E1A6BA2A125B830055DD49 /* DetailsPageViewController.swift in Sources */,
 				B4E1A6C22A1398990055DD49 /* ExerciseCell.swift in Sources */,
 				B4E1A6BD2A1392C00055DD49 /* Exercise.swift in Sources */,
 				B4C0336B2A0CFDC700628277 /* MainViewController.swift in Sources */,

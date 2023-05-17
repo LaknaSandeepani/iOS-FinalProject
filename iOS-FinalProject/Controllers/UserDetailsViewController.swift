@@ -97,7 +97,7 @@ class UserDetailsViewController: UIViewController {
 
     private let sendButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Calculate BMI", for: .normal)
+        button.setTitle("Calculate BMI & Know Your Fitness Plan", for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
