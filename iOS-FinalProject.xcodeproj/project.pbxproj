@@ -18,6 +18,7 @@
 		B4E1A6C22A1398990055DD49 /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C12A1398990055DD49 /* ExerciseCell.swift */; };
 		B4E1A6C42A148C140055DD49 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C32A148C140055DD49 /* ExerciseDetailViewController.swift */; };
 		B4E1A6C62A14D3580055DD49 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */; };
+		B4E1A6C82A14DA100055DD49 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C72A14DA100055DD49 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		B4E1A6C12A1398990055DD49 /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
 		B4E1A6C32A148C140055DD49 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		B4E1A6C72A14DA100055DD49 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				B4E1A6B72A123B140055DD49 /* HomePageViewController.swift */,
 				B4E1A6C32A148C140055DD49 /* ExerciseDetailViewController.swift */,
 				B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */,
+				B4E1A6C72A14DA100055DD49 /* LoginViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				B4E1A6B82A123B140055DD49 /* HomePageViewController.swift in Sources */,
 				B4E1A6C22A1398990055DD49 /* ExerciseCell.swift in Sources */,
 				B4E1A6BD2A1392C00055DD49 /* Exercise.swift in Sources */,
+				B4E1A6C82A14DA100055DD49 /* LoginViewController.swift in Sources */,
 				B4C0336B2A0CFDC700628277 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
