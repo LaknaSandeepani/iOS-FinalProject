@@ -96,6 +96,7 @@ class RegistrationViewController: UIViewController {
         view.addSubview(passwordLabel)
         view.addSubview(passwordTextField)
         view.addSubview(signupButton)
+        signupButton.addTarget(self, action: #selector(signupButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             signupLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -130,7 +131,67 @@ class RegistrationViewController: UIViewController {
             signupButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 32)
         ])
     }
+    
+    @objc private func signupButtonTapped() {
+        guard let name = nameTextField.text,
+              let email = emailTextField.text,
+              let password = passwordTextField.text else {
+            return
+        }
+        
+        // Perform signup process
+        let parameters: [String: Any] = [
+            "name": name,
+            "email": email,
+            "password": password
+        ]
+        
+        // Make an API request to your backend using Alamofire, URLSession, or any other networking library
+        
+        // Example using URLSession
+        guard let url = URL(string: "http://localhost:8088/register") else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+        } catch {
+            print("Error creating JSON data: \(error)")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                // Handle error case
+                return
+            }
+            
+            guard let data = data else {
+                print("No data received")
+                // Handle error case
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                print("Response JSON: \(json)")
+                
+                // Handle the response and show appropriate messages to the user
+                
+            } catch {
+                print("Error parsing JSON: \(error)")
+                // Handle error case
+            }
+        }.resume()
+    }
 }
+
+
 
 
 
