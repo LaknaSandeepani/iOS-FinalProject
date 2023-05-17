@@ -67,6 +67,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        setupLoginButton()
     }
     
     // MARK: - Private Methods
@@ -105,4 +106,93 @@ class LoginViewController: UIViewController {
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 32)
         ])
     }
+    
+    private func setupLoginButton() {
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+    }
+
+    @objc private func loginButtonTapped() {
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text else {
+            return
+        }
+        
+        // Perform login API call
+        performLogin(email: email, password: password)
+    }
+
+    private func performLogin(email: String, password: String) {
+        // Prepare the request URL and parameters
+        let urlString = "http://localhost:8088/login" // Replace with your actual login API URL
+        guard let url = URL(string: urlString) else {
+            showAlert(title: "Error", message: "Invalid URL")
+            return
+        }
+        
+        let parameters: [String: Any] = [
+            "email": email,
+            "password": password
+        ]
+        
+        // Prepare the request body
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
+            showAlert(title: "Error", message: "Failed to serialize request body")
+            return
+        }
+        
+        // Configure the request
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = httpBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Perform the request
+        let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+            // Handle the response and error
+            if let error = error {
+                self?.showAlert(title: "Error", message: error.localizedDescription)
+                return
+            }
+            
+            guard let data = data else {
+                self?.showAlert(title: "Error", message: "No data received")
+                return
+            }
+            
+            // Parse the response data
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+//                    print(json)
+                    // Handle the JSON response
+                    // Example response handling:
+                    if let status = json["status"] as? String {
+                        if status == "Logged in successfully" {
+                            self?.showAlert(title: "Success", message: "Login successful!")
+                        } else {
+                            self?.showAlert(title: "Error", message: "Login failed")
+                        }
+                    } else {
+                        self?.showAlert(title: "Error", message: "Invalid response")
+                    }
+                } else {
+                    self?.showAlert(title: "Error", message: "Failed to parse response")
+                }
+            } catch {
+                self?.showAlert(title: "Error", message: error.localizedDescription)
+            }
+        }
+        
+        // Start the network task
+        task.resume()
+    }
+
+    private func showAlert(title: String, message: String) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+
 }
+
