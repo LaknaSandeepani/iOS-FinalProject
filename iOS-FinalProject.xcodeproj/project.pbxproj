@@ -20,6 +20,9 @@
 		B4E1A6C62A14D3580055DD49 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */; };
 		B4E1A6C82A14DA100055DD49 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C72A14DA100055DD49 /* LoginViewController.swift */; };
 		B4E1A6CA2A1536F10055DD49 /* CustomScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C92A1536F10055DD49 /* CustomScheduleViewController.swift */; };
+		B4E1A6CE2A15DD580055DD49 /* ViewCustomScheduleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6CD2A15DD580055DD49 /* ViewCustomScheduleController.swift */; };
+		B4E1A6D02A15E3DD0055DD49 /* WorkoutSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6CF2A15E3DD0055DD49 /* WorkoutSchedule.swift */; };
+		B4E1A6D22A15F09C0055DD49 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6D12A15F09C0055DD49 /* ScheduleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		B4E1A6C72A14DA100055DD49 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B4E1A6C92A1536F10055DD49 /* CustomScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScheduleViewController.swift; sourceTree = "<group>"; };
+		B4E1A6CD2A15DD580055DD49 /* ViewCustomScheduleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomScheduleController.swift; sourceTree = "<group>"; };
+		B4E1A6CF2A15E3DD0055DD49 /* WorkoutSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSchedule.swift; sourceTree = "<group>"; };
+		B4E1A6D12A15F09C0055DD49 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +98,7 @@
 				B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */,
 				B4E1A6C72A14DA100055DD49 /* LoginViewController.swift */,
 				B4E1A6C92A1536F10055DD49 /* CustomScheduleViewController.swift */,
+				B4E1A6CD2A15DD580055DD49 /* ViewCustomScheduleController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -100,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				B4E1A6BC2A1392C00055DD49 /* Exercise.swift */,
+				B4E1A6CF2A15E3DD0055DD49 /* WorkoutSchedule.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -108,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				B4E1A6C12A1398990055DD49 /* ExerciseCell.swift */,
+				B4E1A6D12A15F09C0055DD49 /* ScheduleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -185,10 +194,13 @@
 				B4E1A6CA2A1536F10055DD49 /* CustomScheduleViewController.swift in Sources */,
 				B4C032F32A06C93800628277 /* AppDelegate.swift in Sources */,
 				B4C032F52A06C93800628277 /* SceneDelegate.swift in Sources */,
+				B4E1A6D22A15F09C0055DD49 /* ScheduleView.swift in Sources */,
 				B4C033752A0E77A100628277 /* UserDetailsViewController.swift in Sources */,
+				B4E1A6CE2A15DD580055DD49 /* ViewCustomScheduleController.swift in Sources */,
 				B4E1A6C62A14D3580055DD49 /* RegistrationViewController.swift in Sources */,
 				B4E1A6C42A148C140055DD49 /* ExerciseDetailViewController.swift in Sources */,
 				B4E1A6B82A123B140055DD49 /* HomePageViewController.swift in Sources */,
+				B4E1A6D02A15E3DD0055DD49 /* WorkoutSchedule.swift in Sources */,
 				B4E1A6C22A1398990055DD49 /* ExerciseCell.swift in Sources */,
 				B4E1A6BD2A1392C00055DD49 /* Exercise.swift in Sources */,
 				B4E1A6C82A14DA100055DD49 /* LoginViewController.swift in Sources */,
