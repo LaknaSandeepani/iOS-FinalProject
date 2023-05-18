@@ -19,6 +19,7 @@
 		B4E1A6C42A148C140055DD49 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C32A148C140055DD49 /* ExerciseDetailViewController.swift */; };
 		B4E1A6C62A14D3580055DD49 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */; };
 		B4E1A6C82A14DA100055DD49 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C72A14DA100055DD49 /* LoginViewController.swift */; };
+		B4E1A6CA2A1536F10055DD49 /* CustomScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6C92A1536F10055DD49 /* CustomScheduleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		B4E1A6C32A148C140055DD49 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		B4E1A6C72A14DA100055DD49 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B4E1A6C92A1536F10055DD49 /* CustomScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScheduleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				B4E1A6C32A148C140055DD49 /* ExerciseDetailViewController.swift */,
 				B4E1A6C52A14D3580055DD49 /* RegistrationViewController.swift */,
 				B4E1A6C72A14DA100055DD49 /* LoginViewController.swift */,
+				B4E1A6C92A1536F10055DD49 /* CustomScheduleViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E1A6CA2A1536F10055DD49 /* CustomScheduleViewController.swift in Sources */,
 				B4C032F32A06C93800628277 /* AppDelegate.swift in Sources */,
 				B4C032F52A06C93800628277 /* SceneDelegate.swift in Sources */,
 				B4C033752A0E77A100628277 /* UserDetailsViewController.swift in Sources */,
