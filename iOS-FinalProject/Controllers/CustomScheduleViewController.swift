@@ -192,36 +192,83 @@ class CustomScheduleViewController: UIViewController {
         exercisesTableView.delegate = self
     }
     
-    class WorkoutSchedule {
-        var days: [String]
-        var times: [String]
-        var duration: String?
-        var exercises: [String]
-        var repeatSchedule: Int
-        var restDays: String?
-        
-        init(days: [String], times: [String], exercises: [String], repeatSchedule: Int) {
-            self.days = days
-            self.times = times
-            self.exercises = exercises
-            self.repeatSchedule = repeatSchedule
-        }
-    }
 
     private func registerTableViewCells() {
         exercisesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "ExerciseCell")
     }
-    
+    struct WorkoutSchedule: Encodable {
+        var days: [String]
+        var times: [String]
+        var exercises: [String]
+        var repeatSchedule: String
+        
+        
+        enum CodingKeys: String, CodingKey {
+            case days
+            case times
+            case exercises
+            case repeatSchedule
+            
+        }
+        
+        func encode(to encoder: Encoder) throws {
+                    var container = encoder.container(keyedBy: CodingKeys.self)
+                    try container.encodeIfPresent(days, forKey: .days)
+                    try container.encodeIfPresent(times, forKey: .times)
+                    try container.encodeIfPresent(exercises, forKey: .exercises)
+                    try container.encode(repeatSchedule, forKey: .repeatSchedule)
+                }
+    }
+
     @objc private func saveButtonTapped() {
         // Save the selected workout days, times, duration, selected exercises, repeat schedule, and rest days
+        
+        let repeatOptions = ["Daily", "Weekly", "Custom"]
+        let repeatSchedule = repeatOptions[repeatSegmentedControl.selectedSegmentIndex]
         let workoutSchedule = WorkoutSchedule(
             days: workoutDays,
             times: workoutTimes,
             exercises: selectedExercises,
-            repeatSchedule: repeatSegmentedControl.selectedSegmentIndex
+            repeatSchedule: repeatSchedule
         )
         
-        // Handle the saving of workout schedule data
+        // Create the URL for the API endpoint
+        guard let url = URL(string: "http://localhost:8088/api/workoutschedule") else {
+            print("Invalid URL")
+            return
+        }
+        
+        // Create the request object
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            // Convert workoutSchedule to JSON data
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let jsonData = try encoder.encode(workoutSchedule)
+            request.httpBody = jsonData
+            
+            // Create a data task to send the request
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    print("Error: \(error)")
+                } else if let response = response as? HTTPURLResponse {
+                    if response.statusCode == 200 {
+                        print("Workout schedule saved successfully.")
+                    } else {
+                        print("Error: HTTP status code \(response.statusCode)")
+                    }
+                }
+            }
+            
+            // Start the data task
+            task.resume()
+            
+        } catch {
+            print("Error encoding workout schedule: \(error)")
+        }
     }
 }
 
@@ -248,15 +295,17 @@ extension CustomScheduleViewController: UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == daysPickerView {
-            let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-            let selectedDay = daysOfWeek[row]
-            workoutDays.append(selectedDay)
-        } else {
-            let selectedTime = "\(row):00"
-            workoutTimes.append(selectedTime)
+            if pickerView == daysPickerView {
+                let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+                let selectedDay = daysOfWeek[row]
+                workoutDays = [selectedDay] // Replace the array with the selected day
+            } else {
+                let selectedTime = "\(row):00"
+                workoutTimes = [selectedTime] // Replace the array with the selected time
+            }
         }
-    }
+    
+    
 }
 
 extension CustomScheduleViewController: UITableViewDataSource, UITableViewDelegate {
@@ -296,6 +345,6 @@ extension CustomScheduleViewController: UITableViewDataSource, UITableViewDelega
         ]
         
         let selectedExercise = exerciseNames[indexPath.row]
-        selectedExercises.append(selectedExercise)
+        selectedExercises = [selectedExercise]
     }
 }
