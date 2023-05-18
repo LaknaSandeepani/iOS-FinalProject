@@ -7,7 +7,8 @@
 
 import UIKit
 
-class HomePageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class HomePageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+
 
     var collectionView: UICollectionView!
     var exercises: [Exercise] = [] // Array to store the fetched exercises
@@ -90,6 +91,21 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
 
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let exercise = exercises[indexPath.item]
+
+        // Create an instance of ExerciseDetailsViewController
+        let exerciseDetailsVC = ExerciseDetailsViewController()
+
+        // Pass the selected exercise data to the details view controller (if needed)
+        exerciseDetailsVC.exercise = exercise
+
+        // Push or present the ExerciseDetailsViewController depending on your navigation flow
+        navigationController?.pushViewController(exerciseDetailsVC, animated: true)
+        // or
+        present(exerciseDetailsVC, animated: true, completion: nil)
+    }
+
 
     
 }

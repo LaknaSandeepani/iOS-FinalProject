@@ -23,6 +23,7 @@
 		B4E1A6CE2A15DD580055DD49 /* ViewCustomScheduleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6CD2A15DD580055DD49 /* ViewCustomScheduleController.swift */; };
 		B4E1A6D02A15E3DD0055DD49 /* WorkoutSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6CF2A15E3DD0055DD49 /* WorkoutSchedule.swift */; };
 		B4E1A6D22A15F09C0055DD49 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6D12A15F09C0055DD49 /* ScheduleView.swift */; };
+		B4E1A6D42A15FA710055DD49 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E1A6D32A15FA710055DD49 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		B4E1A6CD2A15DD580055DD49 /* ViewCustomScheduleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomScheduleController.swift; sourceTree = "<group>"; };
 		B4E1A6CF2A15E3DD0055DD49 /* WorkoutSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSchedule.swift; sourceTree = "<group>"; };
 		B4E1A6D12A15F09C0055DD49 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		B4E1A6D32A15FA710055DD49 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				B4E1A6C72A14DA100055DD49 /* LoginViewController.swift */,
 				B4E1A6C92A1536F10055DD49 /* CustomScheduleViewController.swift */,
 				B4E1A6CD2A15DD580055DD49 /* ViewCustomScheduleController.swift */,
+				B4E1A6D32A15FA710055DD49 /* ViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E1A6D42A15FA710055DD49 /* ViewController.swift in Sources */,
 				B4E1A6CA2A1536F10055DD49 /* CustomScheduleViewController.swift in Sources */,
 				B4C032F32A06C93800628277 /* AppDelegate.swift in Sources */,
 				B4C032F52A06C93800628277 /* SceneDelegate.swift in Sources */,
