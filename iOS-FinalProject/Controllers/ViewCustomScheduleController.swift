@@ -16,9 +16,9 @@ class ViewCustomScheduleController: UIViewController, UICollectionViewDataSource
 
         // Create a layout for the collection view
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 20
+        layout.minimumInteritemSpacing = 10
 
         // Create the collection view
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
@@ -26,7 +26,6 @@ class ViewCustomScheduleController: UIViewController, UICollectionViewDataSource
         collectionView.delegate = self
         collectionView.backgroundColor = .white
         collectionView.register(ScheduleView.self, forCellWithReuseIdentifier: "Cell")
-
 
         // Add the collection view to the view hierarchy
         view.addSubview(collectionView)
@@ -78,18 +77,30 @@ class ViewCustomScheduleController: UIViewController, UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? ScheduleView else {
-            fatalError("Unable to dequeue ExerciseCell")
+            fatalError("Unable to dequeue ScheduleView cell")
         }
 
-        // Configure the cell with exercise data
-        let exercise = workoutSchedules[indexPath.item]
-        cell.nameLabel.text = exercise.repeatSchedule.joined(separator: ", ")
+        // Configure the cell with workout schedule data
+        let workoutSchedule = workoutSchedules[indexPath.item]
+        cell.daysLabel.text = "Day: \(workoutSchedule.days.joined(separator: ", "))"
+        cell.exercisesLabel.text = "Exercise: \(workoutSchedule.exercises.joined(separator: ", "))"
+        cell.repeatScheduleLabel.text = "Repeat Schedule: \(workoutSchedule.repeatSchedule.joined(separator: ", "))"
 
-
-        // Customize the cell's appearance based on exercise data
+        // Customize the cell's appearance based on workout schedule data
+        cell.backgroundColor = .lightGray
+        cell.layer.cornerRadius = 10
 
         return cell
     }
+
+    // MARK: UICollectionViewDelegateFlowLayout
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width - 20
+        let height = collectionView.bounds.height - 700
+        return CGSize(width: width, height: height)
+    }
+
 
     
 }

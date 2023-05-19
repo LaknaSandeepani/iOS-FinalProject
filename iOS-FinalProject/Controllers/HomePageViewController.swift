@@ -28,7 +28,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
 
         // Create a layout for the collection view
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 20
 
@@ -145,27 +145,28 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         cell.nameLabel.text = exercise.name
 
         // Customize the cell's appearance based on exercise data
-
+        cell.backgroundColor = .lightGray
+        cell.layer.cornerRadius = 10
         return cell
     }
 
     // MARK: UISearchBarDelegate
 
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            filteredExercises = exercises
-        } else {
-            filteredExercises = exercises.filter { $0.name.lowercased().contains(searchText.lowercased()) }
-        }
-        collectionView.reloadData()
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        searchBar.resignFirstResponder()
-        filteredExercises = exercises
-        collectionView.reloadData()
-    }
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if searchText.isEmpty {
+//            filteredExercises = exercises
+//        } else {
+//            filteredExercises = exercises.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+//        }
+//        collectionView.reloadData()
+//    }
+//
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        searchBar.text = ""
+//        searchBar.resignFirstResponder()
+//        filteredExercises = exercises
+//        collectionView.reloadData()
+//    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let exercise = exercises[indexPath.item]
@@ -207,5 +208,12 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
     // MARK: - Category Data
 
     let category = ["WeightGain", "WeightLoss"]
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = 350 // Assign the desired width value for each cell
+        let height = 150 // Assign the desired height value for each cell
+        return CGSize(width: width, height: height)
+    }
+
 }
 
