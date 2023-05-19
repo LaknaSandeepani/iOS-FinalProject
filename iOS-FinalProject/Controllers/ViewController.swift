@@ -16,24 +16,26 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
 
         // Create view controllers for each tab
         let userDetailsViewController = UserDetailsViewController()
+        let homePageViewController = HomePageViewController()
         let customScheduleViewController = CustomScheduleViewController()
         let viewCustomScheduleController = ViewCustomScheduleController()
         
         // Set titles and icons for each tab
-        userDetailsViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "home"), tag: 0)
-        customScheduleViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "schedule"), tag: 1)
-        viewCustomScheduleController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "view"), tag: 2)
+        userDetailsViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "user"), tag: 0)
+        homePageViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "home"), tag: 1)
+        customScheduleViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "schedule"), tag: 2)
+        viewCustomScheduleController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "view"), tag: 3)
         
         // Set the view controllers for the tab bar controller
         let tabBar = UITabBarController()
-        tabBar.viewControllers = [userDetailsViewController, customScheduleViewController, viewCustomScheduleController]
+        tabBar.viewControllers = [userDetailsViewController,homePageViewController, customScheduleViewController, viewCustomScheduleController]
         
         // Set the delegate of the tab bar controller
         tabBar.delegate = self
 
         // Customize the appearance of the tab bar
         tabBar.tabBar.barTintColor = .white
-        tabBar.tabBar.tintColor = .black
+        tabBar.tabBar.tintColor = .blue
 
         // Embed the tab bar controller inside a navigation controller
         let navigationController = UINavigationController(rootViewController: tabBar)

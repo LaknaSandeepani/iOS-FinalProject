@@ -41,7 +41,7 @@ class MainViewController: UIViewController {
         // Center the labels horizontally and vertically
         NSLayoutConstraint.activate([
             workoutLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            workoutLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -280),
+            workoutLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -300),
             volumeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             volumeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -220),
             bodyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),

@@ -112,15 +112,15 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
         return label
     }()
     
-    private let fitnessLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Click To View Suggested Exercises"
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = .blue
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.isUserInteractionEnabled = true
-        return label
-    }()
+//    private let fitnessLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "Click To View Suggested Exercises"
+//        label.font = UIFont.boldSystemFont(ofSize: 15)
+//        label.textColor = .blue
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.isUserInteractionEnabled = true
+//        return label
+//    }()
 
 
     // MARK: - View Lifecycle
@@ -152,10 +152,10 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
         view.addSubview(sendButton)
 //        view.addSubview(calculateBMIButton)
         view.addSubview(bmiLabel)
-        view.addSubview(fitnessLabel)
+//        view.addSubview(fitnessLabel)
         sendButton.addTarget(self, action: #selector(calculateBMI), for: .touchUpInside)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(navigateToNextActivity))
-        fitnessLabel.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(navigateToNextActivity))
+//        fitnessLabel.addGestureRecognizer(tapGesture)
         
     }
     
@@ -250,12 +250,12 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
         ])
 
         // Fitness Lable Constraints
-        NSLayoutConstraint.activate([
-            fitnessLabel.topAnchor.constraint(equalTo: bmiLabel.bottomAnchor, constant: 10),
-            fitnessLabel.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
-            fitnessLabel.leadingAnchor.constraint(greaterThanOrEqualTo: margins.leadingAnchor),
-            fitnessLabel.trailingAnchor.constraint(lessThanOrEqualTo: margins.trailingAnchor)
-        ])
+//        NSLayoutConstraint.activate([
+//            fitnessLabel.topAnchor.constraint(equalTo: bmiLabel.bottomAnchor, constant: 10),
+//            fitnessLabel.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
+//            fitnessLabel.leadingAnchor.constraint(greaterThanOrEqualTo: margins.leadingAnchor),
+//            fitnessLabel.trailingAnchor.constraint(lessThanOrEqualTo: margins.trailingAnchor)
+//        ])
 
        
         
@@ -358,12 +358,12 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
     
         }
     
-    @objc private func navigateToNextActivity() {
-        // Perform the navigation to the next activity here
-       
-        let nextViewController = HomePageViewController()
-        present(nextViewController, animated: true, completion: nil)
-    }
+//    @objc private func navigateToNextActivity() {
+//        // Perform the navigation to the next activity here
+//
+//        let nextViewController = HomePageViewController()
+//        present(nextViewController, animated: true, completion: nil)
+//    }
     
     
     }

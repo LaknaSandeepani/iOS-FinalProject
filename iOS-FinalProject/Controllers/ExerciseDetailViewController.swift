@@ -118,6 +118,11 @@ class ExerciseDetailsViewController: UIViewController {
         view.addSubview(timerLabel)
         view.addSubview(startButton)
         view.addSubview(stopButton)
+        proceedButton.addTarget(self, action: #selector(proceedButtonTapped), for: .touchUpInside)
+        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        stopButton.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
+
+
         
         nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true

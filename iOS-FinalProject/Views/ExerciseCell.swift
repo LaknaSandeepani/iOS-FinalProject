@@ -34,7 +34,7 @@ class ExerciseCell: UICollectionViewCell {
         // Adjust constraints based on your desired layout
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         
         
