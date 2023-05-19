@@ -116,6 +116,11 @@ class MainViewController: UIViewController {
         let range = (registerLabel.text! as NSString).range(of: "Register")
         attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.yellow, range: range)
         registerLabel.attributedText = attributedString
+        
+        // Add tap gesture recognizer to the registerLabel
+        registerLabel.isUserInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(registerLabelTapped))
+        registerLabel.addGestureRecognizer(tapGestureRecognizer)
 
         // Center the label horizontally and position it below the button
         NSLayoutConstraint.activate([
@@ -126,8 +131,27 @@ class MainViewController: UIViewController {
     }
     
     @objc func startButtonTapped() {
-        // Handle start button tapped
+        let loginViewController = LoginViewController() // Instantiate LoginViewController using its initializer
+        
+        if let navigationController = navigationController {
+            navigationController.pushViewController(loginViewController, animated: true)
+        } else {
+            present(loginViewController, animated: true, completion: nil)
+        }
     }
+    
+    // Action method for the tap gesture recognizer
+    @objc func registerLabelTapped() {
+        let registerViewController = RegistrationViewController() // Instantiate RegisterViewController using its initializer
+        
+        if let navigationController = navigationController {
+            navigationController.pushViewController(registerViewController, animated: true)
+        } else {
+            present(registerViewController, animated: true, completion: nil)
+        }
+    }
+
+
     
 
   

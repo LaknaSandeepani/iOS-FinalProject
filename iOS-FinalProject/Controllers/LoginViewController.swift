@@ -162,12 +162,17 @@ class LoginViewController: UIViewController {
             // Parse the response data
             do {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-//                    print(json)
-                    // Handle the JSON response
-                    // Example response handling:
                     if let status = json["status"] as? String {
                         if status == "Logged in successfully" {
-                            self?.showAlert(title: "Success", message: "Login successful!")
+                            DispatchQueue.main.async {
+                                let userDetailsViewController = ViewController() // Instantiate UserDetailsViewController using its initializer
+                                
+                                if let navigationController = self?.navigationController {
+                                    navigationController.pushViewController(userDetailsViewController, animated: true)
+                                } else {
+                                    self?.present(userDetailsViewController, animated: true, completion: nil)
+                                }
+                            }
                         } else {
                             self?.showAlert(title: "Error", message: "Login failed")
                         }
@@ -182,7 +187,6 @@ class LoginViewController: UIViewController {
             }
         }
         
-        // Start the network task
         task.resume()
     }
 

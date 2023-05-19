@@ -15,24 +15,25 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
         view.backgroundColor = .white
 
         // Create view controllers for each tab
-        let mainViewController = MainViewController()
         let userDetailsViewController = UserDetailsViewController()
-        let loginViewController = LoginViewController()
-
+        let customScheduleViewController = CustomScheduleViewController()
+        let viewCustomScheduleController = ViewCustomScheduleController()
+        
         // Set titles and icons for each tab
-        mainViewController.tabBarItem = UITabBarItem(title: "First", image: UIImage(named: "t"), tag: 0)
-        userDetailsViewController.tabBarItem = UITabBarItem(title: "Second", image: UIImage(named: "t"), tag: 1)
-        loginViewController.tabBarItem = UITabBarItem(title: "Third", image: UIImage(named: "t"), tag: 2)
-
+        userDetailsViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "home"), tag: 0)
+        customScheduleViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "schedule"), tag: 1)
+        viewCustomScheduleController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "view"), tag: 2)
+        
         // Set the view controllers for the tab bar controller
-        tabBar.viewControllers = [mainViewController, userDetailsViewController, loginViewController]
-
+        let tabBar = UITabBarController()
+        tabBar.viewControllers = [userDetailsViewController, customScheduleViewController, viewCustomScheduleController]
+        
         // Set the delegate of the tab bar controller
         tabBar.delegate = self
 
         // Customize the appearance of the tab bar
         tabBar.tabBar.barTintColor = .white
-        tabBar.tabBar.tintColor = .blue
+        tabBar.tabBar.tintColor = .black
 
         // Embed the tab bar controller inside a navigation controller
         let navigationController = UINavigationController(rootViewController: tabBar)
@@ -41,48 +42,15 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
         addChild(navigationController)
         view.addSubview(navigationController.view)
         navigationController.view.translatesAutoresizingMaskIntoConstraints = false
-        navigationController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        navigationController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        navigationController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        navigationController.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            navigationController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            navigationController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            navigationController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            navigationController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        ])
+
     }
 
-    // MARK: - UITabBarControllerDelegate methods
-
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if let selectedViewController = tabBarController.selectedViewController {
-            // Perform navigation or additional logic based on the selected view controller
-            if selectedViewController == tabBarController.viewControllers?[0] {
-                // First tab selected
-                navigateToFirstTab()
-            } else if selectedViewController == tabBarController.viewControllers?[1] {
-                // Second tab selected
-                navigateToSecondTab()
-            } else if selectedViewController == tabBarController.viewControllers?[2] {
-                // Third tab selected
-                navigateToThirdTab()
-            }
-        }
-    }
-
-    // Custom navigation methods for each tab
-    func navigateToFirstTab() {
-        // Perform navigation to the respective view controller for the first tab
-        let mainViewController = MainViewController()
-        navigationController?.pushViewController(mainViewController, animated: true)
-    }
-
-    func navigateToSecondTab() {
-        // Perform navigation to the respective view controller for the second tab
-        let userDetailsViewController = UserDetailsViewController()
-        navigationController?.pushViewController(userDetailsViewController, animated: true)
-    }
-
-    func navigateToThirdTab() {
-        // Perform navigation to the respective view controller for the third tab
-        let loginViewController = LoginViewController()
-        navigationController?.pushViewController(loginViewController, animated: true)
-    }
 }
 
 

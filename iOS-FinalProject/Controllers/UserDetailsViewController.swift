@@ -7,8 +7,8 @@
 
 import UIKit
 
-class UserDetailsViewController: UIViewController {
-    
+class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
+    let tabBar = UITabBarController()
     // MARK: - UI Elements
     
     private let detailsLabel: UILabel = {
@@ -20,8 +20,6 @@ class UserDetailsViewController: UIViewController {
         return label
     }()
 
-    
-    
     private let heightLabel: UILabel = {
         let label = UILabel()
         label.text = "Height (cm)"
@@ -106,17 +104,6 @@ class UserDetailsViewController: UIViewController {
         return button
     }()
     
-//    private let calculateBMIButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setTitle("Send", for: .normal)
-//        button.backgroundColor = .black
-//        button.layer.cornerRadius = 5
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//        button.widthAnchor.constraint(equalToConstant: 200).isActive = true
-//        return button
-//    }()
-
     private let bmiLabel: UILabel = {
         let label = UILabel()
         label.text = "Your BMI is: "
@@ -141,10 +128,9 @@ class UserDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        title = "User Details"
-        view.backgroundColor = .gray
-        
+        view.backgroundColor = .white
+   
+                
         setupViews()
         setupConstraints()
     }
@@ -179,7 +165,7 @@ class UserDetailsViewController: UIViewController {
         // Details Label Constraints
         NSLayoutConstraint.activate([
             detailsLabel.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
-            detailsLabel.topAnchor.constraint(equalTo: margins.topAnchor, constant: 10)
+            detailsLabel.topAnchor.constraint(equalTo: margins.topAnchor, constant: -20)
         ])
 
         // Height Label Constraints
@@ -254,12 +240,6 @@ class UserDetailsViewController: UIViewController {
             sendButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
         ])
 
-//        // calculateBMIButton Constraints
-//        NSLayoutConstraint.activate([
-//            calculateBMIButton.leadingAnchor.constraint(equalTo: sendButton.leadingAnchor),
-//            calculateBMIButton.topAnchor.constraint(equalTo: sendButton.bottomAnchor, constant: 10),
-//            calculateBMIButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
-//        ])
 
         // BMI Lable Constraints
         NSLayoutConstraint.activate([
@@ -277,9 +257,11 @@ class UserDetailsViewController: UIViewController {
             fitnessLabel.trailingAnchor.constraint(lessThanOrEqualTo: margins.trailingAnchor)
         ])
 
-
+       
         
     }
+    
+
     @objc private func calculateBMI() {
         guard let heightText = heightTextField.text,
               !heightText.isEmpty,
@@ -382,6 +364,8 @@ class UserDetailsViewController: UIViewController {
         let nextViewController = HomePageViewController()
         present(nextViewController, animated: true, completion: nil)
     }
+    
+    
     }
 
 
