@@ -17,6 +17,7 @@ struct Exercise: Codable {
     let muscleGroups: [String]
     let videoUrl: String
     let repcount: Int
+    let image: String
     
    
 }

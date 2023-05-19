@@ -12,7 +12,6 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
     var collectionView: UICollectionView!
     var exercises: [Exercise] = [] // Array to store the fetched exercises
     var filteredExercises: [Exercise] = [] // Array to store the filtered exercises
-//    let searchBar = UISearchBar() // Search bar
     let categoryPicker = UIPickerView() // Category dropdown picker
     var selectedCategory: String? // Selected category
     
@@ -55,22 +54,11 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         categoryPicker.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(categoryPicker)
         NSLayoutConstraint.activate([
-            categoryPicker.topAnchor.constraint(equalTo: fitnessGoalLabel.bottomAnchor, constant: 10),
+            categoryPicker.topAnchor.constraint(equalTo: fitnessGoalLabel.bottomAnchor, constant: 5),
             categoryPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             categoryPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             categoryPicker.heightAnchor.constraint(equalToConstant: 100)
         ])
-
-//        // Create and configure the search bar
-//        searchBar.delegate = self
-//        searchBar.placeholder = "Search Exercises"
-//        searchBar.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(searchBar)
-//        NSLayoutConstraint.activate([
-//            searchBar.topAnchor.constraint(equalTo: categoryPicker.bottomAnchor),
-//            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-//        ])
 
         // Add the collection view to the view hierarchy
         view.addSubview(collectionView)
@@ -143,30 +131,29 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         // Configure the cell with exercise data
         let exercise = filteredExercises[indexPath.item]
         cell.nameLabel.text = exercise.name
-
+        // Fetch the image asynchronously
+               if let imageURL = URL(string: exercise.image) {
+                   let task = URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+                       if let error = error {
+                           print("Failed to fetch image:", error)
+                           return
+                       }
+                       
+                       if let data = data, let image = UIImage(data: data) {
+                           DispatchQueue.main.async {
+                               cell.exerciseImageView.image = image
+                           }
+                       }
+                   }
+                   task.resume()
+               } else {
+                   cell.exerciseImageView.image = UIImage(named: "placeholderImage")
+               }
         // Customize the cell's appearance based on exercise data
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 10
         return cell
     }
-
-    // MARK: UISearchBarDelegate
-
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if searchText.isEmpty {
-//            filteredExercises = exercises
-//        } else {
-//            filteredExercises = exercises.filter { $0.name.lowercased().contains(searchText.lowercased()) }
-//        }
-//        collectionView.reloadData()
-//    }
-//
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        searchBar.text = ""
-//        searchBar.resignFirstResponder()
-//        filteredExercises = exercises
-//        collectionView.reloadData()
-//    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let exercise = exercises[indexPath.item]
@@ -207,7 +194,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
 
     // MARK: - Category Data
 
-    let category = ["WeightGain", "WeightLoss"]
+    let category = ["MuscleBuilding", "WeightLoss"]
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = 350 // Assign the desired width value for each cell
