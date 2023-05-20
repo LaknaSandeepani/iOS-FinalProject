@@ -115,6 +115,7 @@ class LoginViewController: UIViewController {
         guard let email = emailTextField.text,
               let password = passwordTextField.text else {
             return
+            
         }
         
         // Perform login API call

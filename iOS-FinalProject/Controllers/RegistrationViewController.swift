@@ -146,9 +146,7 @@ class RegistrationViewController: UIViewController {
             "password": password
         ]
         
-        // Make an API request to your backend using Alamofire, URLSession, or any other networking library
         
-        // Example using URLSession
         guard let url = URL(string: "http://localhost:8088/register") else {
             return
         }

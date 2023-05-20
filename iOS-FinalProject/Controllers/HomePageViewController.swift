@@ -163,7 +163,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
 
         // Pass the selected exercise data to the details view controller (if needed)
         exerciseDetailsVC.exercise = exercise
-
+        
         // Push the ExerciseDetailsViewController onto the navigation stack
         navigationController?.pushViewController(exerciseDetailsVC, animated: true)
     }

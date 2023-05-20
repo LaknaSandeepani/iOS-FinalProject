@@ -12,32 +12,27 @@ class ExerciseCell: UICollectionViewCell {
     // Create custom UI elements for exercise details
     let exerciseImageView: UIImageView = {
         let imageView = UIImageView()
-        // Configure image view properties
         return imageView
     }()
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        // Configure label properties
         return label
     }()
     
     let categoryLabel: UILabel = {
         let label = UILabel()
-        // Configure label properties
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        // Add the custom UI elements to the cell's contentView
+     
         contentView.addSubview(exerciseImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(categoryLabel)
         
-        // Add layout constraints for the custom UI elements
-        // Adjust constraints based on your desired layout
         
         exerciseImageView.translatesAutoresizingMaskIntoConstraints = false
         exerciseImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true

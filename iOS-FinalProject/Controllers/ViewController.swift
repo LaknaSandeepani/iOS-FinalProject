@@ -21,10 +21,10 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
         let viewCustomScheduleController = ViewCustomScheduleController()
         
         // Set titles and icons for each tab
-        userDetailsViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "user"), tag: 0)
-        homePageViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "home"), tag: 1)
-        customScheduleViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "schedule"), tag: 2)
-        viewCustomScheduleController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "view"), tag: 3)
+        userDetailsViewController.tabBarItem = UITabBarItem(title: "BMI", image: UIImage(named: "user"), tag: 0)
+        homePageViewController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "home"), tag: 1)
+        customScheduleViewController.tabBarItem = UITabBarItem(title: "Schedule", image: UIImage(named: "schedule"), tag: 2)
+        viewCustomScheduleController.tabBarItem = UITabBarItem(title: "View", image: UIImage(named: "view"), tag: 3)
         
         // Set the view controllers for the tab bar controller
         let tabBar = UITabBarController()
@@ -52,6 +52,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
         ])
 
     }
+    
 
 }
 

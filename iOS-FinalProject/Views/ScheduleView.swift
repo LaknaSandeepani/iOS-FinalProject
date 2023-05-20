@@ -11,19 +11,16 @@ class ScheduleView: UICollectionViewCell {
 
     let daysLabel: UILabel = {
         let label = UILabel()
-        // Configure label properties for days
         return label
     }()
 
     let exercisesLabel: UILabel = {
         let label = UILabel()
-        // Configure label properties for exercises
         return label
     }()
 
     let repeatScheduleLabel: UILabel = {
         let label = UILabel()
-        // Configure label properties for repeatSchedule
         return label
     }()
 
@@ -35,9 +32,7 @@ class ScheduleView: UICollectionViewCell {
         contentView.addSubview(exercisesLabel)
         contentView.addSubview(repeatScheduleLabel)
         
-        // Add layout constraints for the custom UI elements
-        // Adjust constraints based on your desired layout
-
+       
         daysLabel.translatesAutoresizingMaskIntoConstraints = false
         daysLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         daysLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true

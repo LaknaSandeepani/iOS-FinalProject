@@ -230,8 +230,10 @@ class CustomScheduleViewController: UIViewController {
             times: workoutTimes,
             exercises: selectedExercises,
             repeatSchedule: repeatSchedule
+            
         )
-        
+    
+           
         // Create the URL for the API endpoint
         guard let url = URL(string: "http://localhost:8088/api/workoutschedule") else {
             print("Invalid URL")

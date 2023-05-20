@@ -136,9 +136,12 @@ class MainViewController: UIViewController {
         if let navigationController = navigationController {
             navigationController.pushViewController(loginViewController, animated: true)
         } else {
-            present(loginViewController, animated: true, completion: nil)
+            let navController = UINavigationController(rootViewController: loginViewController)
+            navController.modalPresentationStyle = .fullScreen
+            present(navController, animated: true, completion: nil)
         }
     }
+
     
     // Action method for the tap gesture recognizer
     @objc func registerLabelTapped() {

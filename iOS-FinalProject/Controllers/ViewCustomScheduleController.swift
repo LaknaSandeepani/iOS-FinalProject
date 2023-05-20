@@ -93,7 +93,7 @@ class ViewCustomScheduleController: UIViewController, UICollectionViewDataSource
         return cell
     }
 
-    // MARK: UICollectionViewDelegateFlowLayout
+    
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width - 20
