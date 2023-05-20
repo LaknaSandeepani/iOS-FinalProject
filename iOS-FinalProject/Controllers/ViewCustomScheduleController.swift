@@ -83,8 +83,11 @@ class ViewCustomScheduleController: UIViewController, UICollectionViewDataSource
         // Configure the cell with workout schedule data
         let workoutSchedule = workoutSchedules[indexPath.item]
         cell.daysLabel.text = "Day: \(workoutSchedule.days.joined(separator: ", "))"
+        cell.timeLabel.text = "Time: \(workoutSchedule.times.joined(separator: ", "))"
         cell.exercisesLabel.text = "Exercise: \(workoutSchedule.exercises.joined(separator: ", "))"
         cell.repeatScheduleLabel.text = "Repeat Schedule: \(workoutSchedule.repeatSchedule.joined(separator: ", "))"
+
+
 
         // Customize the cell's appearance based on workout schedule data
         cell.backgroundColor = .lightGray
@@ -93,7 +96,7 @@ class ViewCustomScheduleController: UIViewController, UICollectionViewDataSource
         return cell
     }
 
-    
+   
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width - 20

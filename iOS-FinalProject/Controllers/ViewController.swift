@@ -35,7 +35,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
 
         // Customize the appearance of the tab bar
         tabBar.tabBar.barTintColor = .white
-        tabBar.tabBar.tintColor = .blue
+        tabBar.tabBar.tintColor = .black
 
         // Embed the tab bar controller inside a navigation controller
         let navigationController = UINavigationController(rootViewController: tabBar)

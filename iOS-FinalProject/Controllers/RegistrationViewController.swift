@@ -11,7 +11,7 @@ class RegistrationViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let signupLabel: UILabel = {
+    let signupLabel: UILabel = {
         let label = UILabel()
         label.text = "Sign Up"
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -20,14 +20,14 @@ class RegistrationViewController: UIViewController {
         return label
     }()
     
-    private let nameLabel: UILabel = {
+    let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let nameTextField: UITextField = {
+    let nameTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.keyboardType = .default
@@ -35,14 +35,14 @@ class RegistrationViewController: UIViewController {
         return textField
     }()
     
-    private let emailLabel: UILabel = {
+    let emailLabel: UILabel = {
         let label = UILabel()
         label.text = "Email Address"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let emailTextField: UITextField = {
+    let emailTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.keyboardType = .emailAddress
@@ -50,14 +50,14 @@ class RegistrationViewController: UIViewController {
         return textField
     }()
     
-    private let passwordLabel: UILabel = {
+    let passwordLabel: UILabel = {
         let label = UILabel()
         label.text = "Password"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let passwordTextField: UITextField = {
+    let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
@@ -65,7 +65,7 @@ class RegistrationViewController: UIViewController {
         return textField
     }()
     
-    private let signupButton: UIButton = {
+    let signupButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.backgroundColor = .black
@@ -77,16 +77,16 @@ class RegistrationViewController: UIViewController {
         return button
     }()
     
-    // MARK: - Lifecycle Methods
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
     
-    // MARK: - Private Methods
+
     
-    private func configureUI() {
+    func configureUI() {
         view.backgroundColor = .white
         view.addSubview(signupLabel)
         view.addSubview(nameLabel)
@@ -132,7 +132,7 @@ class RegistrationViewController: UIViewController {
         ])
     }
     
-    @objc private func signupButtonTapped() {
+    @objc func signupButtonTapped() {
         guard let name = nameTextField.text,
               let email = emailTextField.text,
               let password = passwordTextField.text else {

@@ -9,9 +9,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    // MARK: - Properties
+  
     
-    private let loginLabel: UILabel = {
+    let loginLabel: UILabel = {
         let label = UILabel()
         label.text = "Log In"
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -20,14 +20,14 @@ class LoginViewController: UIViewController {
         return label
     }()
     
-    private let emailLabel: UILabel = {
+    let emailLabel: UILabel = {
         let label = UILabel()
         label.text = "Email Address"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let emailTextField: UITextField = {
+    let emailTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.keyboardType = .emailAddress
@@ -35,14 +35,14 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
-    private let passwordLabel: UILabel = {
+    let passwordLabel: UILabel = {
         let label = UILabel()
         label.text = "Password"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let passwordTextField: UITextField = {
+    let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
-    private let loginButton: UIButton = {
+    let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Log In", for: .normal)
         button.backgroundColor = .black
@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    private let registerLabel: UILabel = {
+    let registerLabel: UILabel = {
             let label = UILabel()
             label.text = "Don't have an account? Register"
             label.textColor = .blue
@@ -71,7 +71,7 @@ class LoginViewController: UIViewController {
             return label
         }()
         
-    // MARK: - Lifecycle Methods
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,9 +80,9 @@ class LoginViewController: UIViewController {
         setupRegisterLabel()
     }
     
-    // MARK: - Private Methods
+  
     
-    private func configureUI() {
+    func configureUI() {
         view.backgroundColor = .white
         view.addSubview(loginLabel)
         view.addSubview(emailLabel)
@@ -120,21 +120,21 @@ class LoginViewController: UIViewController {
             registerLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16)
         ])
     }
-    private func setupRegisterLabel() {
+    func setupRegisterLabel() {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(registerLabelTapped))
             registerLabel.isUserInteractionEnabled = true
             registerLabel.addGestureRecognizer(tapGesture)
         }
-    @objc private func registerLabelTapped() {
+    @objc func registerLabelTapped() {
             let registrationViewController = RegistrationViewController()
             navigationController?.pushViewController(registrationViewController, animated: true)
         }
     
-    private func setupLoginButton() {
+    func setupLoginButton() {
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
 
-    @objc private func loginButtonTapped() {
+    @objc func loginButtonTapped() {
         guard let email = emailTextField.text,
               let password = passwordTextField.text else {
             return
@@ -145,7 +145,7 @@ class LoginViewController: UIViewController {
         performLogin(email: email, password: password)
     }
 
-    private func performLogin(email: String, password: String) {
+    func performLogin(email: String, password: String) {
         // Prepare the request URL and parameters
         let urlString = "http://localhost:8088/login" // Replace with your actual login API URL
         guard let url = URL(string: urlString) else {
@@ -214,7 +214,7 @@ class LoginViewController: UIViewController {
         task.resume()
     }
 
-    private func showAlert(title: String, message: String) {
+    func showAlert(title: String, message: String) {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

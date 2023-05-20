@@ -9,11 +9,11 @@ import UIKit
 
 class CustomScheduleViewController: UIViewController {
     
-    private var workoutDays: [String] = []
-    private var workoutTimes: [String] = []
-    private var selectedExercises: [String] = []
+    var workoutDays: [String] = []
+    var workoutTimes: [String] = []
+    var selectedExercises: [String] = []
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Custom Schedule"
         label.font = UIFont.systemFont(ofSize: 18)
@@ -22,7 +22,7 @@ class CustomScheduleViewController: UIViewController {
         return label
     }()
     
-    private let daysLabel: UILabel = {
+    let daysLabel: UILabel = {
         let label = UILabel()
         label.text = "Workout Days:"
         label.font = UIFont.boldSystemFont(ofSize: 16)
@@ -30,7 +30,7 @@ class CustomScheduleViewController: UIViewController {
         return label
     }()
     
-    private let timesLabel: UILabel = {
+    let timesLabel: UILabel = {
         let label = UILabel()
         label.text = "Workout Times:"
         label.font = UIFont.boldSystemFont(ofSize: 16)
@@ -38,7 +38,7 @@ class CustomScheduleViewController: UIViewController {
         return label
     }()
     
-    private let exercisesLabel: UILabel = {
+    let exercisesLabel: UILabel = {
         let label = UILabel()
         label.text = "Selected Exercises:"
         label.font = UIFont.boldSystemFont(ofSize: 16)
@@ -46,7 +46,7 @@ class CustomScheduleViewController: UIViewController {
         return label
     }()
     
-    private let repeatLabel: UILabel = {
+    let repeatLabel: UILabel = {
         let label = UILabel()
         label.text = "Repeat Schedule:"
         label.font = UIFont.boldSystemFont(ofSize: 16)
@@ -54,25 +54,25 @@ class CustomScheduleViewController: UIViewController {
         return label
     }()
     
-    private let daysPickerView: UIPickerView = {
+    let daysPickerView: UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         return pickerView
     }()
     
-    private let timesPickerView: UIPickerView = {
+    let timesPickerView: UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         return pickerView
     }()
 
-    private let exercisesTableView: UITableView = {
+    let exercisesTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
-    private let repeatSegmentedControl: UISegmentedControl = {
+    let repeatSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Daily", "Weekly", "Custom"])
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +80,7 @@ class CustomScheduleViewController: UIViewController {
     }()
 
     
-    private let saveButton: UIButton = {
+    let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Save Schedule", for: .normal)
         button.backgroundColor = .black
@@ -100,7 +100,7 @@ class CustomScheduleViewController: UIViewController {
         registerTableViewCells()
     }
     
-    private func configureUI() {
+    func configureUI() {
         view.backgroundColor = .white
         
         // Add title label
@@ -193,7 +193,7 @@ class CustomScheduleViewController: UIViewController {
     }
     
 
-    private func registerTableViewCells() {
+    func registerTableViewCells() {
         exercisesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "ExerciseCell")
     }
     struct WorkoutSchedule: Encodable {
@@ -220,7 +220,7 @@ class CustomScheduleViewController: UIViewController {
                 }
     }
 
-    @objc private func saveButtonTapped() {
+    @objc func saveButtonTapped() {
         // Validate the selected options
         guard !workoutDays.isEmpty else {
             showAlertOnMainThread(message: "Please select at least one workout day.")
@@ -288,13 +288,13 @@ class CustomScheduleViewController: UIViewController {
         }
     }
 
-    private func showAlertOnMainThread(message: String) {
+    func showAlertOnMainThread(message: String) {
         DispatchQueue.main.async {
             self.showAlert(message: message)
         }
     }
 
-    private func showAlert(message: String) {
+    func showAlert(message: String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(okAction)

@@ -7,6 +7,7 @@
 
 import Foundation
 struct WorkoutSchedule: Codable {
+//    let scheduleid: String
     let days: [String]
     let times: [String]
     let exercises: [String]

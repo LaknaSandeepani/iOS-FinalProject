@@ -10,7 +10,7 @@ import UIKit
 class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
     let tabBar = UITabBarController()
  
-    private let detailsLabel: UILabel = {
+    let detailsLabel: UILabel = {
         let label = UILabel()
         label.text = "User Details Capture"
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -19,14 +19,14 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
         return label
     }()
 
-    private let heightLabel: UILabel = {
+    let heightLabel: UILabel = {
         let label = UILabel()
         label.text = "Height (cm)"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let heightTextField: UITextField = {
+    let heightTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.keyboardType = .decimalPad
@@ -34,14 +34,14 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
         return textField
     }()
     
-    private let weightLabel: UILabel = {
+    let weightLabel: UILabel = {
         let label = UILabel()
         label.text = "Weight (kg)"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let weightTextField: UITextField = {
+    let weightTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.keyboardType = .decimalPad
@@ -49,14 +49,14 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
         return textField
     }()
     
-    private let ageLabel: UILabel = {
+    let ageLabel: UILabel = {
         let label = UILabel()
         label.text = "Age"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private let ageTextField: UITextField = {
+    let ageTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.keyboardType = .numberPad
@@ -64,35 +64,35 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
         return textField
     }()
 
-    private let genderLabel: UILabel = {
+    let genderLabel: UILabel = {
         let label = UILabel()
         label.text = "Gender"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let genderTextField: UITextField = {
+    let genderTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.keyboardType = .decimalPad
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
-    private let fitnessGoalLabel: UILabel = {
+    let fitnessGoalLabel: UILabel = {
         let label = UILabel()
         label.text = "Fitness Goal"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private let fitnessGoalTextField: UITextField = {
+    let fitnessGoalTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
 
-    private let sendButton: UIButton = {
+    let sendButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Calculate BMI & Know Your Fitness Plan", for: .normal)
         button.backgroundColor = .black
@@ -103,7 +103,7 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
         return button
     }()
     
-    private let bmiLabel: UILabel = {
+    let bmiLabel: UILabel = {
         let label = UILabel()
         label.text = "Your BMI is: "
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -125,7 +125,7 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
     
     
     
-    private func setupViews() {
+    func setupViews() {
         view.addSubview(detailsLabel)
         view.addSubview(heightLabel)
         view.addSubview(heightTextField)
@@ -144,7 +144,7 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
         
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         let margins = view.layoutMarginsGuide
         
         // Details Label Constraints
@@ -239,7 +239,7 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
     }
     
 
-    @objc private func calculateBMI() {
+    @objc func calculateBMI() {
         guard let heightText = heightTextField.text,
               !heightText.isEmpty,
               let height = Double(heightText),
@@ -357,8 +357,8 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
         present(alert, animated: true, completion: nil)
     }
 
-    private func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
