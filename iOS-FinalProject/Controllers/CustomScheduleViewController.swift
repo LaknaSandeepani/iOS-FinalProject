@@ -221,6 +221,23 @@ class CustomScheduleViewController: UIViewController {
     }
 
     @objc private func saveButtonTapped() {
+        // Validate the selected options
+        guard !workoutDays.isEmpty else {
+            showAlertOnMainThread(message: "Please select at least one workout day.")
+            return
+        }
+        
+        guard !workoutTimes.isEmpty else {
+            showAlertOnMainThread(message: "Please select at least one workout time.")
+            return
+        }
+        
+        guard !selectedExercises.isEmpty else {
+            showAlertOnMainThread(message: "Please select at least one exercise.")
+            return
+        }
+        
+        
         // Save the selected workout days, times, duration, selected exercises, repeat schedule, and rest days
         
         let repeatOptions = ["Daily", "Weekly", "Custom"]
@@ -230,13 +247,11 @@ class CustomScheduleViewController: UIViewController {
             times: workoutTimes,
             exercises: selectedExercises,
             repeatSchedule: repeatSchedule
-            
         )
-    
-           
+        
         // Create the URL for the API endpoint
         guard let url = URL(string: "http://localhost:8088/api/workoutschedule") else {
-            print("Invalid URL")
+            showAlertOnMainThread(message: "Invalid URL")
             return
         }
         
@@ -255,12 +270,12 @@ class CustomScheduleViewController: UIViewController {
             // Create a data task to send the request
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 if let error = error {
-                    print("Error: \(error)")
+                    self.showAlertOnMainThread(message: "Error: \(error)")
                 } else if let response = response as? HTTPURLResponse {
                     if response.statusCode == 200 {
-                        print("Workout schedule saved successfully.")
+                        self.showAlertOnMainThread(message: "Workout schedule saved successfully.")
                     } else {
-                        print("Error: HTTP status code \(response.statusCode)")
+                        self.showAlertOnMainThread(message: "Error: HTTP status code \(response.statusCode)")
                     }
                 }
             }
@@ -269,9 +284,24 @@ class CustomScheduleViewController: UIViewController {
             task.resume()
             
         } catch {
-            print("Error encoding workout schedule: \(error)")
+            showAlertOnMainThread(message: "Error encoding workout schedule: \(error)")
         }
     }
+
+    private func showAlertOnMainThread(message: String) {
+        DispatchQueue.main.async {
+            self.showAlert(message: message)
+        }
+    }
+
+    private func showAlert(message: String) {
+        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+
 }
 
 extension CustomScheduleViewController: UIPickerViewDataSource, UIPickerViewDelegate {
