@@ -146,7 +146,6 @@ class RegistrationViewController: UIViewController {
             "password": password
         ]
         
-        
         guard let url = URL(string: "http://localhost:8088/register") else {
             return
         }

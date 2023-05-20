@@ -300,10 +300,10 @@ extension CustomScheduleViewController: UIPickerViewDataSource, UIPickerViewDele
             if pickerView == daysPickerView {
                 let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                 let selectedDay = daysOfWeek[row]
-                workoutDays = [selectedDay] // Replace the array with the selected day
+                workoutDays = [selectedDay]
             } else {
                 let selectedTime = "\(row):00"
-                workoutTimes = [selectedTime] // Replace the array with the selected time
+                workoutTimes = [selectedTime]
             }
         }
     

@@ -246,94 +246,124 @@ class UserDetailsViewController: UIViewController,UITabBarControllerDelegate {
               let weightText = weightTextField.text,
               !weightText.isEmpty,
               let weight = Double(weightText) else {
-            bmiLabel.text = "Please enter valid height and weight"
+            showErrorAlert(message: "Please enter valid height and weight")
             return
         }
         
-        let age = ageTextField.text
-        let gender = genderTextField.text
-        let goal = fitnessGoalTextField.text
+        guard let ageText = ageTextField.text,
+              !ageText.isEmpty,
+              let age = Int(ageText) else {
+            showErrorAlert(message: "Please enter valid age")
+            return
+        }
+        
+        guard let gender = genderTextField.text,
+              !gender.isEmpty else {
+            showErrorAlert(message: "Please enter gender")
+            return
+        }
+        
+        guard let goal = fitnessGoalTextField.text,
+              !goal.isEmpty else {
+            showErrorAlert(message: "Please enter fitness goal")
+            return
+        }
+
         let heightInMeters = height / 100.0
         let bmi = weight / (heightInMeters * heightInMeters)
-        
+
         // Create the request URL
-            guard let url = URL(string: "http://localhost:8088/api/save-bmi") else {
-                print("Invalid URL")
-                return
-            }
+        guard let url = URL(string: "http://localhost:8088/api/save-bmi") else {
+            showErrorAlert(message: "Invalid URL")
+            return
+        }
+        
         // Create the request body
-            let requestBody: [String: Any] = [
-                "age":age,
-                "gender":gender,
-                "height": height,
-                "weight": weight,
-                "bmi": bmi,
-                "goal": goal
-            ]
-            
-            // Convert the request body to JSON data
-            guard let jsonData = try? JSONSerialization.data(withJSONObject: requestBody) else {
-                print("Failed to serialize JSON data")
+        let requestBody: [String: Any] = [
+            "age": age,
+            "gender": gender,
+            "height": height,
+            "weight": weight,
+            "bmi": bmi,
+            "goal": goal
+        ]
+        
+        // Convert the request body to JSON data
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: requestBody) else {
+            showErrorAlert(message: "Failed to serialize JSON data")
+            return
+        }
+        
+        // Create the HTTP request
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        // Send the HTTP request
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Request error:", error)
                 return
             }
-        // Create the HTTP request
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.httpBody = jsonData
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        // Send the HTTP request
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                if let error = error {
-                    print("Request error:", error)
-                    return
-                }
-                
-                guard let data = data else {
-                    print("No response data")
-                    return
-                }
-                
-                // Handle the response data
-                if let responseString = String(data: data, encoding: .utf8) {
-                    print("Response:", responseString)
-                }
+
+            guard let data = data else {
+                print("No response data")
+                return
             }
-            
-            task.resume()
-        
-        
+
+            // Handle the response data
+            if let responseString = String(data: data, encoding: .utf8) {
+                print("Response:", responseString)
+            }
+        }
+
+        task.resume()
+
         let formattedBMI = String(format: "%.2f", bmi)
         bmiLabel.text = String(format: "Your BMI is: %.1f", bmi)
-        
+
         // Suggest a fitness plan based on BMI value
         var plan: String
         if bmi < 18.5 {
             bmiLabel.textColor = UIColor.blue
             bmiLabel.text = "Underweight (\(formattedBMI))"
-            plan = "You are underweight. You can improve your BMI by increasing your calorie intake and doing muscle-building exercises.Good to follow Muscle Building Plans"
+            plan = "You are underweight. You can improve your BMI by increasing your calorie intake and doing muscle-building exercises. Good to follow Muscle Building Plans"
         } else if bmi < 25 {
             bmiLabel.textColor = UIColor.green
             bmiLabel.text = "Normal weight (\(formattedBMI))"
-            plan = "You are at a healthy weight. Keep it up by eating a balanced diet and staying active.Good to follow Muscle Building Plans"
+            plan = "You are at a healthy weight. Keep it up by eating a balanced diet and staying active. Good to follow Muscle Building Plans"
         } else if bmi < 30 {
             bmiLabel.textColor = UIColor.orange
             bmiLabel.text = "Overweight (\(formattedBMI))"
-            plan = "You are overweight. You can improve your BMI by reducing your calorie intake, increasing your physical activity, and doing cardiovascular exercises.Good to follow Weight Loss Plans"
+            plan = "You are overweight. You can improve your BMI by reducing your calorie intake, increasing your physical activity, and doing cardiovascular exercises. Good to follow Weight Loss Plans"
         } else {
             bmiLabel.textColor = UIColor.red
             bmiLabel.text = "Obese (\(formattedBMI))"
-            plan = "You are obese. You can improve your BMI by reducing your calorie intake, increasing your physical activity, and doing both cardiovascular and strength-training exercises.Good to follow Weight Loss Plans"
+            plan = "You are obese. You can improve your BMI by reducing your calorie intake, increasing your physical activity, and doing both cardiovascular and strength-training exercises. Good to follow Weight Loss Plans"
         }
-        
+
         // Display the user's BMI and suggested fitness plan in an alert
         let alert = UIAlertController(title: "Your BMI", message: "Your BMI is \(formattedBMI)\n\n\(plan)", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            // Clear the text fields after dismissing the alert
+            self.heightTextField.text = ""
+            self.weightTextField.text = ""
+            self.ageTextField.text = ""
+            self.genderTextField.text = ""
+            self.fitnessGoalTextField.text = ""
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+
+    private func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
-    
-    
-        }
+    }
+
     
     }
 

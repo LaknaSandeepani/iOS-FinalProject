@@ -62,12 +62,22 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private let registerLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Don't have an account? Register"
+            label.textColor = .blue
+            label.textAlignment = .center
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         setupLoginButton()
+        setupRegisterLabel()
     }
     
     // MARK: - Private Methods
@@ -80,6 +90,7 @@ class LoginViewController: UIViewController {
         view.addSubview(passwordLabel)
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
+        view.addSubview(registerLabel)
         
         NSLayoutConstraint.activate([
             loginLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -103,9 +114,21 @@ class LoginViewController: UIViewController {
             passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 32)
+            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 32),
+            
+            registerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            registerLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16)
         ])
     }
+    private func setupRegisterLabel() {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(registerLabelTapped))
+            registerLabel.isUserInteractionEnabled = true
+            registerLabel.addGestureRecognizer(tapGesture)
+        }
+    @objc private func registerLabelTapped() {
+            let registrationViewController = RegistrationViewController()
+            navigationController?.pushViewController(registrationViewController, animated: true)
+        }
     
     private func setupLoginButton() {
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)

@@ -234,19 +234,7 @@ class ExerciseDetailsViewController: UIViewController {
         timerLabel.text = String(format: "%02d:%02d", minutes, seconds)
     }
    
-//    @objc func backButtonTapped() {
-//        // Find the Registerviewcontroller in the navigation stack
-//        for viewController in navigationController?.viewControllers ?? [] {
-//            if let registerVC = viewController as? LoginViewController {
-//                // Pop to the found Registerviewcontroller
-//                navigationController?.popToViewController(registerVC, animated: true)
-//                return
-//            }
-//        }
-//
-//        // If the Registerviewcontroller is not found, pop the current view controller
-//        navigationController?.popViewController(animated: true)
-//    }
+
 
 
 

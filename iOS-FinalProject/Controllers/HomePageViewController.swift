@@ -18,7 +18,8 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
     let fitnessGoalLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Select Your Fitness Goal:"
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.text = "Select a Goal & Experience the Best Matches....."
         return label
     }()
 
@@ -150,7 +151,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
                    cell.exerciseImageView.image = UIImage(named: "placeholderImage")
                }
         // Customize the cell's appearance based on exercise data
-        cell.backgroundColor = .lightGray
+        cell.backgroundColor = .gray
         cell.layer.cornerRadius = 10
         return cell
     }

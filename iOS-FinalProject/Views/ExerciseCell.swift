@@ -37,8 +37,8 @@ class ExerciseCell: UICollectionViewCell {
         exerciseImageView.translatesAutoresizingMaskIntoConstraints = false
         exerciseImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         exerciseImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        exerciseImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        exerciseImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        exerciseImageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        exerciseImageView.heightAnchor.constraint(equalToConstant: 120).isActive = true
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
