@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
         
         // Add a "Workout Planner" label
         let workoutLabel = UILabel()
-        workoutLabel.text = "FITNESS PLANNER"
+        workoutLabel.text = "FITNESS GUIDER"
         workoutLabel.textColor = .white
         workoutLabel.font = UIFont.systemFont(ofSize: 15)
         workoutLabel.translatesAutoresizingMaskIntoConstraints = false

@@ -150,7 +150,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
                    cell.exerciseImageView.image = UIImage(named: "placeholderImage")
                }
       
-        cell.backgroundColor = .gray
+        cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 10
         return cell
     }

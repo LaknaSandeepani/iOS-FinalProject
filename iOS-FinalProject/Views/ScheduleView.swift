@@ -8,7 +8,7 @@ import UIKit
 import UserNotifications
 
 class ScheduleView: UICollectionViewCell {
-    var scheduleID: String?
+//    var scheduleID: String?
     let daysLabel: UILabel = {
         let label = UILabel()
         return label
@@ -33,10 +33,12 @@ class ScheduleView: UICollectionViewCell {
         let button = UIButton(type: .system)
         button.setTitle("Delete", for: .normal)
         button.backgroundColor = .white
+        button.setTitleColor(.red, for: .normal) 
         button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+
     
     let remindButton: UIButton = {
             let button = UIButton(type: .system)
@@ -95,56 +97,56 @@ class ScheduleView: UICollectionViewCell {
     }
     
     @objc func deleteButtonTapped() {
-        guard let scheduleID = scheduleID else {
-            // Handle the scenario where the schedule ID is not available
-            return
-        }
-        
-        let urlString = "http://localhost:8088/deleteschedule"
-        guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let requestBody: [String: Any] = [
-            "_id": scheduleID
-        ]
-        
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: requestBody, options: [])
-            
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                if let error = error {
-                    print("Request error:", error)
-                    return
-                }
-                
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    print("Invalid response")
-                    return
-                }
-                
-                if httpResponse.statusCode == 200 {
-                    // Schedule deletion was successful
-                    DispatchQueue.main.async {
-                        self.showAlert(title: "Success", message: "Schedule deleted successfully.")
-                    }
-                } else {
-                    // Schedule deletion failed
-                    DispatchQueue.main.async {
-                        self.showAlert(title: "Error", message: "Failed to delete schedule.")
-                    }
-                }
-            }
-            
-            task.resume()
-        } catch {
-            print("Error encoding request body:", error)
-        }
+//        guard let scheduleID = scheduleID else {
+//            // Handle the scenario where the schedule ID is not available
+//            return
+//        }
+//
+//        let urlString = "http://localhost:8088/deleteschedule"
+//        guard let url = URL(string: urlString) else {
+//            print("Invalid URL")
+//            return
+//        }
+//
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "DELETE"
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//
+//        let requestBody: [String: Any] = [
+//            "_id": scheduleID
+//        ]
+//
+//        do {
+//            request.httpBody = try JSONSerialization.data(withJSONObject: requestBody, options: [])
+//
+//            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+//                if let error = error {
+//                    print("Request error:", error)
+//                    return
+//                }
+//
+//                guard let httpResponse = response as? HTTPURLResponse else {
+//                    print("Invalid response")
+//                    return
+//                }
+//
+//                if httpResponse.statusCode == 200 {
+//                    // Schedule deletion was successful
+//                    DispatchQueue.main.async {
+//                        self.showAlert(title: "Success", message: "Schedule deleted successfully.")
+//                    }
+//                } else {
+//                    // Schedule deletion failed
+//                    DispatchQueue.main.async {
+//                        self.showAlert(title: "Error", message: "Failed to delete schedule.")
+//                    }
+//                }
+//            }
+//
+//            task.resume()
+//        } catch {
+//            print("Error encoding request body:", error)
+//        }
     }
    
         @objc func remindButtonTapped() {

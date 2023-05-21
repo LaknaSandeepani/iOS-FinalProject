@@ -202,11 +202,13 @@ class LoginViewController: UIViewController {
                             DispatchQueue.main.async {
                                 let userDetailsViewController = ViewController()
                                 
+                                
                                 if let navigationController = self?.navigationController {
                                     navigationController.pushViewController(userDetailsViewController, animated: true)
                                 } else {
                                     self?.present(userDetailsViewController, animated: true, completion: nil)
                                 }
+                                self?.clearFields()
                             }
                         } else {
                             self?.showAlert(title: "Error", message: "Login failed")
@@ -231,6 +233,12 @@ class LoginViewController: UIViewController {
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
+    }
+    
+    func clearFields() {
+        
+        emailTextField.text = ""
+        passwordTextField.text = ""
     }
 
 }

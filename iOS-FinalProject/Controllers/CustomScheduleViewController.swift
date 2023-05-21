@@ -7,7 +7,7 @@
 import UIKit
 
 class CustomScheduleViewController: UIViewController {
-    
+//    var scheduleID: String
     var workoutDays: [String] = []
     var workoutTimes: [String] = []
     var selectedExercises: [String] = []
@@ -196,6 +196,7 @@ class CustomScheduleViewController: UIViewController {
         exercisesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "ExerciseCell")
     }
     struct WorkoutSchedule: Encodable {
+//        var _id: String?
         var days: [String]
         var times: [String]
         var exercises: [String]
@@ -203,6 +204,7 @@ class CustomScheduleViewController: UIViewController {
         
         
         enum CodingKeys: String, CodingKey {
+//            case _id
             case days
             case times
             case exercises
@@ -212,6 +214,7 @@ class CustomScheduleViewController: UIViewController {
         
         func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
+//            try container.encodeIfPresent(_id, forKey: ._id)
                     try container.encodeIfPresent(days, forKey: .days)
                     try container.encodeIfPresent(times, forKey: .times)
                     try container.encodeIfPresent(exercises, forKey: .exercises)
@@ -242,6 +245,7 @@ class CustomScheduleViewController: UIViewController {
         let repeatOptions = ["Daily", "Weekly", "Custom"]
         let repeatSchedule = repeatOptions[repeatSegmentedControl.selectedSegmentIndex]
         let workoutSchedule = WorkoutSchedule(
+//            _id: scheduleID,
             days: workoutDays,
             times: workoutTimes,
             exercises: selectedExercises,

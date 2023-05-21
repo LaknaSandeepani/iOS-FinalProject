@@ -94,7 +94,7 @@ class ViewCustomScheduleController: UIViewController, UICollectionViewDataSource
         // Configure the cell with workout schedule data
         let workoutSchedule = workoutSchedules[indexPath.item]
         
-        cell.scheduleID = workoutSchedule._id
+//        cell.scheduleID = workoutSchedule._id
         cell.daysLabel.text = "Day: \(workoutSchedule.days.joined(separator: ", "))"
         cell.timeLabel.text = "Time: \(workoutSchedule.times.joined(separator: ", "))"
         cell.exercisesLabel.text = "Exercise: \(workoutSchedule.exercises.joined(separator: ", "))"
