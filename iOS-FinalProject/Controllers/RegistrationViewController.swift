@@ -3,13 +3,11 @@
 //  iOS-FinalProject
 //
 //  Created by Lakna Attigala on 2023-05-17.
-//
 
 import UIKit
 
 class RegistrationViewController: UIViewController {
-    
-    // MARK: - Properties
+
     
     let signupLabel: UILabel = {
         let label = UILabel()
@@ -77,14 +75,18 @@ class RegistrationViewController: UIViewController {
         return button
     }()
     
-   
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "exercise")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
-    
-
     
     func configureUI() {
         view.backgroundColor = .white
@@ -96,6 +98,7 @@ class RegistrationViewController: UIViewController {
         view.addSubview(passwordLabel)
         view.addSubview(passwordTextField)
         view.addSubview(signupButton)
+        view.addSubview(imageView)
         signupButton.addTarget(self, action: #selector(signupButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -128,18 +131,33 @@ class RegistrationViewController: UIViewController {
             passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             signupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signupButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 32)
+            signupButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 32),
+            
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: signupButton.bottomAnchor, constant: 32),
+            imageView.widthAnchor.constraint(equalToConstant: 400),
+            imageView.heightAnchor.constraint(equalToConstant: 400)
         ])
     }
+
     
     @objc func signupButtonTapped() {
-        guard let name = nameTextField.text,
-              let email = emailTextField.text,
-              let password = passwordTextField.text else {
+        guard let name = nameTextField.text, !name.isEmpty else {
+            showAlert(message: "Please enter your name.")
             return
         }
         
-        // Perform signup process
+        guard let email = emailTextField.text, !email.isEmpty else {
+            showAlert(message: "Please enter your email address.")
+            return
+        }
+        
+        guard let password = passwordTextField.text, password.count >= 3 else {
+                showAlert(message: "Password must be at least 3 characters.")
+                return
+            }
+        
+       
         let parameters: [String: Any] = [
             "name": name,
             "email": email,
@@ -147,6 +165,7 @@ class RegistrationViewController: UIViewController {
         ]
         
         guard let url = URL(string: "http://localhost:8088/register") else {
+            showAlert(message: "Invalid URL")
             return
         }
         
@@ -158,19 +177,22 @@ class RegistrationViewController: UIViewController {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
         } catch {
             print("Error creating JSON data: \(error)")
+            showAlert(message: "An error occurred")
             return
         }
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            guard let self = self else { return }
+            
             if let error = error {
                 print("Error: \(error)")
-                // Handle error case
+                self.showAlert(message: "An error occurred")
                 return
             }
             
             guard let data = data else {
                 print("No data received")
-                // Handle error case
+                self.showAlert(message: "No data received")
                 return
             }
             
@@ -180,12 +202,29 @@ class RegistrationViewController: UIViewController {
                 
                 // Handle the response and show appropriate messages to the user
                 
+                DispatchQueue.main.async {
+                    self.showAlert(message: "Registration successful.Move to login & get the experience.")
+                    self.clearFields()
+                }
             } catch {
                 print("Error parsing JSON: \(error)")
-                // Handle error case
+                self.showAlert(message: "An error occurred")
             }
         }.resume()
     }
+
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+
+    func clearFields() {
+        nameTextField.text = ""
+        emailTextField.text = ""
+        passwordTextField.text = ""
+    }
+
 }
 
 

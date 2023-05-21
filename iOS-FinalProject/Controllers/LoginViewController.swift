@@ -3,7 +3,6 @@
 //  iOS-FinalProject
 //
 //  Created by Lakna Attigala on 2023-05-17.
-//
 
 import UIKit
 
@@ -65,12 +64,18 @@ class LoginViewController: UIViewController {
     let registerLabel: UILabel = {
             let label = UILabel()
             label.text = "Don't have an account? Register"
-            label.textColor = .blue
+            label.textColor = .gray
             label.textAlignment = .center
             label.translatesAutoresizingMaskIntoConstraints = false
             return label
         }()
-        
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "exercise")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
    
     
     override func viewDidLoad() {
@@ -91,6 +96,7 @@ class LoginViewController: UIViewController {
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
         view.addSubview(registerLabel)
+        view.addSubview(imageView)
         
         NSLayoutConstraint.activate([
             loginLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -117,7 +123,12 @@ class LoginViewController: UIViewController {
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 32),
             
             registerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            registerLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16)
+            registerLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: registerLabel.bottomAnchor, constant: 32),
+            imageView.widthAnchor.constraint(equalToConstant: 400),
+            imageView.heightAnchor.constraint(equalToConstant: 400)
         ])
     }
     func setupRegisterLabel() {
@@ -146,8 +157,8 @@ class LoginViewController: UIViewController {
     }
 
     func performLogin(email: String, password: String) {
-        // Prepare the request URL and parameters
-        let urlString = "http://localhost:8088/login" // Replace with your actual login API URL
+    
+        let urlString = "http://localhost:8088/login"
         guard let url = URL(string: urlString) else {
             showAlert(title: "Error", message: "Invalid URL")
             return
@@ -189,7 +200,7 @@ class LoginViewController: UIViewController {
                     if let status = json["status"] as? String {
                         if status == "Logged in successfully" {
                             DispatchQueue.main.async {
-                                let userDetailsViewController = ViewController() // Instantiate UserDetailsViewController using its initializer
+                                let userDetailsViewController = ViewController()
                                 
                                 if let navigationController = self?.navigationController {
                                     navigationController.pushViewController(userDetailsViewController, animated: true)

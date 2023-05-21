@@ -3,8 +3,9 @@
 //  iOS-FinalProject
 //
 //  Created by Lakna Attigala on 2023-05-18.
-//
+
 import UIKit
+import UserNotifications
 
 class ScheduleView: UICollectionViewCell {
     var scheduleID: String?
@@ -145,9 +146,33 @@ class ScheduleView: UICollectionViewCell {
             print("Error encoding request body:", error)
         }
     }
-    @objc func remindButtonTapped() {
-          
-       }
+   
+        @objc func remindButtonTapped() {
+            // Create a unique identifier for the reminder
+            let reminderIdentifier = "Reminder-\(UUID().uuidString)"
+            
+            // Create a notification content
+            let content = UNMutableNotificationContent()
+            content.title = "Reminder"
+            content.body = "Don't forget to follow your workout schedule!"
+            
+            // Create a trigger for the notification (e.g., trigger it after 1 minute)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
+            
+            // Create a request for the notification
+            let request = UNNotificationRequest(identifier: reminderIdentifier, content: content, trigger: trigger)
+            
+            // Schedule the notification
+            UNUserNotificationCenter.current().add(request) { (error) in
+                if let error = error {
+                    print("Failed to schedule reminder:", error)
+                } else {
+                    print("Reminder scheduled successfully")
+                }
+            }
+        }
+
+        
     
     func showAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

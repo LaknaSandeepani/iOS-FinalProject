@@ -3,7 +3,6 @@
 //  iOS-FinalProject
 //
 //  Created by Lakna Attigala on 2023-05-17.
-//
 
 import UIKit
 
@@ -221,7 +220,7 @@ class CustomScheduleViewController: UIViewController {
     }
 
     @objc func saveButtonTapped() {
-        // Validate the selected options
+        
         guard !workoutDays.isEmpty else {
             showAlertOnMainThread(message: "Please select at least one workout day.")
             return

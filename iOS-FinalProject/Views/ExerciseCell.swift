@@ -9,7 +9,7 @@ import UIKit
 
 class ExerciseCell: UICollectionViewCell {
     
-    // Create custom UI elements for exercise details
+  
     let exerciseImageView: UIImageView = {
         let imageView = UIImageView()
         return imageView

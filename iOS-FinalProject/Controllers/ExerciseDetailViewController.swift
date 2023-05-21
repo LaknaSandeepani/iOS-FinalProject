@@ -3,7 +3,7 @@
 //  iOS-FinalProject
 //
 //  Created by Lakna Attigala on 2023-05-17.
-//
+
 import UIKit
 import AVKit
 
@@ -234,8 +234,5 @@ class ExerciseDetailsViewController: UIViewController {
         timerLabel.text = String(format: "%02d:%02d", minutes, seconds)
     }
    
-
-
-
 
 }

@@ -14,23 +14,36 @@ class ViewCustomScheduleController: UIViewController, UICollectionViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // layout for the collection view
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if let error = error {
+                print("Error requesting notification authorization:", error)
+            } else {
+                if granted {
+                    print("Notification authorization granted")
+                } else {
+                    print("Notification authorization denied")
+                }
+            }
+        }
+
+        
+        // Layout for the collection view
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
         
-        // collection view
+        // Collection view
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .white
         collectionView.register(ScheduleView.self, forCellWithReuseIdentifier: "Cell")
         
-        // Add the collection view to the view hierarchy
+      
         view.addSubview(collectionView)
         
-        // Fetch schedules from the API
+     
         fetchSchedules()
     }
 
@@ -52,7 +65,7 @@ class ViewCustomScheduleController: UIViewController, UICollectionViewDataSource
                 return
             }
             
-            // Parse the response data
+          
             do {
                 let decoder = JSONDecoder()
                 self?.workoutSchedules = try decoder.decode([WorkoutSchedule].self, from: data)
@@ -87,20 +100,42 @@ class ViewCustomScheduleController: UIViewController, UICollectionViewDataSource
         cell.exercisesLabel.text = "Exercise: \(workoutSchedule.exercises.joined(separator: ", "))"
         cell.repeatScheduleLabel.text = "Repeat Schedule: \(workoutSchedule.repeatSchedule.joined(separator: ", "))"
         
-        // Customize the cell's appearance based on workout schedule data
+       
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 10
+        
+
+        cell.deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        cell.remindButton.addTarget(self, action: #selector(remindButtonTapped), for: .touchUpInside)
         
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width - 20
-                let height = collectionView.bounds.height - 700
-                return CGSize(width: width, height: height)
+        let height = collectionView.bounds.height - 700
+        return CGSize(width: width, height: height)
     }
-
-
+    
+    @objc func deleteButtonTapped(sender: UIButton) {
+        // Get the cell in which the delete button was tapped
+        guard let cell = sender.superview?.superview as? ScheduleView else {
+            print("Unable to find the ScheduleView cell")
+            return
+        }
+        
+        cell.deleteButtonTapped()
+    }
+    
+    @objc func remindButtonTapped(sender: UIButton) {
+        // Get the cell in which the remind button was tapped
+        guard let cell = sender.superview?.superview as? ScheduleView else {
+            print("Unable to find the ScheduleView cell")
+            return
+        }
+        
+        cell.remindButtonTapped()
+    }
     
 }
 

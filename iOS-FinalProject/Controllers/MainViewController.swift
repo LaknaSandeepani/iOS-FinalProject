@@ -3,7 +3,6 @@
 //  iOS-FinalProject
 //
 //  Created by Lakna Attigala on 2023-05-11.
-//
 
 import UIKit
 
@@ -48,13 +47,13 @@ class MainViewController: UIViewController {
             bodyLabel.topAnchor.constraint(equalTo: volumeLabel.bottomAnchor)
         ])
         
-        // Create a UIImageView to display the splash image
+       
         let splashImageView = UIImageView(image: UIImage(named: "mainscreen"))
         splashImageView.contentMode = .scaleAspectFit
         splashImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(splashImageView)
         
-        // Center the image view horizontally and vertically
+   
         NSLayoutConstraint.activate([
             splashImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             splashImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 40),
@@ -103,30 +102,30 @@ class MainViewController: UIViewController {
             ])
             
         
-//        // Add a "Don't have an account? Register" label
-        let registerLabel = UILabel()
-        registerLabel.text = "Don't have any account? Register"
-        registerLabel.textColor = .white
-        registerLabel.font = UIFont.systemFont(ofSize: 15)
-        registerLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(registerLabel)
-
-        // Set the color of "Register" to yellow
-        let attributedString = NSMutableAttributedString(string: registerLabel.text!)
-        let range = (registerLabel.text! as NSString).range(of: "Register")
-        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.yellow, range: range)
-        registerLabel.attributedText = attributedString
-        
-        // Add tap gesture recognizer to the registerLabel
-        registerLabel.isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(registerLabelTapped))
-        registerLabel.addGestureRecognizer(tapGestureRecognizer)
-
-        // Center the label horizontally and position it below the button
-        NSLayoutConstraint.activate([
-            registerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            registerLabel.topAnchor.constraint(equalTo: startButton.bottomAnchor, constant: 16)
-        ])
+       // Add a "Don't have an account? Register" label
+//        let registerLabel = UILabel()
+//        registerLabel.text = "Don't have any account? Register"
+//        registerLabel.textColor = .white
+//        registerLabel.font = UIFont.systemFont(ofSize: 15)
+//        registerLabel.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(registerLabel)
+//
+//        // Set the color of "Register" to yellow
+//        let attributedString = NSMutableAttributedString(string: registerLabel.text!)
+//        let range = (registerLabel.text! as NSString).range(of: "Register")
+//        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.yellow, range: range)
+//        registerLabel.attributedText = attributedString
+//
+//        // Add tap gesture recognizer to the registerLabel
+//        registerLabel.isUserInteractionEnabled = true
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(registerLabelTapped))
+//        registerLabel.addGestureRecognizer(tapGestureRecognizer)
+//
+//        // Center the label horizontally and position it below the button
+//        NSLayoutConstraint.activate([
+//            registerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            registerLabel.topAnchor.constraint(equalTo: startButton.bottomAnchor, constant: 16)
+//        ])
 
     }
     
@@ -144,14 +143,14 @@ class MainViewController: UIViewController {
 
     
     // Action method for the tap gesture recognizer
-    @objc func registerLabelTapped() {
-        let registerViewController = RegistrationViewController() // Instantiate RegisterViewController using its initializer
-        
-        if let navigationController = navigationController {
-            navigationController.pushViewController(registerViewController, animated: true)
-        } else {
-            present(registerViewController, animated: true, completion: nil)
-        }
+//    @objc func registerLabelTapped() {
+//        let registerViewController = RegistrationViewController() // Instantiate RegisterViewController using its initializer
+//
+//        if let navigationController = navigationController {
+//            navigationController.pushViewController(registerViewController, animated: true)
+//        } else {
+//            present(registerViewController, animated: true, completion: nil)
+//        }
     }
 
 
@@ -159,4 +158,4 @@ class MainViewController: UIViewController {
 
   
 
-}
+

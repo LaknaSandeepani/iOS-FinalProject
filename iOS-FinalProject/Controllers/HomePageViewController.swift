@@ -3,7 +3,6 @@
 //  iOS-FinalProject
 //
 //  Created by Lakna Attigala on 2023-05-15.
-//
 
 import UIKit
 
@@ -118,7 +117,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         task.resume()
     }
 
-    // MARK: UICollectionViewDataSource
+   
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredExercises.count
@@ -150,7 +149,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
                } else {
                    cell.exerciseImageView.image = UIImage(named: "placeholderImage")
                }
-        // Customize the cell's appearance based on exercise data
+      
         cell.backgroundColor = .gray
         cell.layer.cornerRadius = 10
         return cell
@@ -169,7 +168,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         navigationController?.pushViewController(exerciseDetailsVC, animated: true)
     }
 
-    // MARK: UIPickerViewDataSource
+ 
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -180,7 +179,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         return category.count
     }
 
-    // MARK: UIPickerViewDelegate
+   
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         // Return the title for each row in the picker
@@ -193,13 +192,13 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
         fetchExercises()
     }
 
-    // MARK: - Category Data
+    
 
     let category = ["MuscleBuilding", "WeightLoss"]
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = 350 // Assign the desired width value for each cell
-        let height = 150 // Assign the desired height value for each cell
+        let width = 350
+        let height = 150 
         return CGSize(width: width, height: height)
     }
 
